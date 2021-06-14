@@ -4,9 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QAManagement</title>
+<style>
+.u_result{
+	width:500px;
+	height:300px;
+	background-color:#ffffe0;
+	margin:auto;
+}
+p{
+	text-align:center;
+}
+</style>
 </head>
 <body>
-
+<div class="u_result">
+<p>会員情報を変更しました。</p>
+</div>
 </body>
 </html>

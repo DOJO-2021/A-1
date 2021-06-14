@@ -4,9 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QAManagement</title>
+<style>
+footer{
+	padding-bottom:60px;
+	background-color:#cccccc;
+}
+</style>
 </head>
 <body>
-
+<footer>
+<p>©copyrigh heiwajima All rights reserved.</p>
+</footer>
 </body>
 </html>
