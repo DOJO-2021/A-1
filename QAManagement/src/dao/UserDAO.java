@@ -12,10 +12,10 @@ import java.util.List;
 import model.User;	// この先はmodel.UserをUserとよぶ
 
 public class UserDAO {
-
+	// ログインできるならtrueを返す
 
     // ログイン
-	public User login(String id, String pw) {
+	public User login(String id, String pw) { //サーブレットから引数で渡される
 		Connection conn = null;			//初期値を空っぽに
         User user = null;
 		try {
@@ -29,7 +29,7 @@ public class UserDAO {
 			// ログイン用SQL
 			String sql = "select * from User where user_id = ? and user_pw = ?";		// countが1件ならいい
 			PreparedStatement pStmt = conn.prepareStatement(sql);		// PreparedStatementが無害化して↓
-			pStmt.setString(1, id);		// 1番目の?マークにユーザーが入れたidを入れる
+			pStmt.setString(1, id);		// 1番目の?マークにユーザーが入れたidを入れる(サーブレットからもらった)
 			pStmt.setString(2, pw);		// 2番目の?マークにユーザーが入れたpwを入れる
 
 			// SELECT文を実行し、結果表を取得する
@@ -68,14 +68,14 @@ public class UserDAO {
 		}
 
 		// 結果を返す
-		return user;   // ログインできるならtrueできないならfaulse
+		return user;   // 情報を格納したuserをかえす
 	}
 
 
 	// 個人絞り込み検索
 	public List<User> userFilter(String name) {
 
-		List<User> userList = new ArrayList<User>();
+		List<User> userList = new ArrayList<User>();  //User型の要素をしまうListを作る
 
 		Connection conn = null;			//初期値を空っぽに
 
@@ -90,7 +90,7 @@ public class UserDAO {
 			// 絞り込み検索用SQL
 			String sql = "select * from User where name = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);		// PreparedStatementが無害化して↓
-			pStmt.setString(1, "%" + name + "%");		// 1番目の?マークにユーザーが入れたidを入れる paramはUser型
+			pStmt.setString(1, "%" + name + "%");		// 1番目の?マークにユーザーが入れたnameを入れる User型
 
 			// SELECT文を実行し、結果表を取得する
 			ResultSet rs = pStmt.executeQuery();
