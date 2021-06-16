@@ -12,7 +12,7 @@ import java.util.List;
 import model.User;	// この先はmodel.UserをUserとよぶ
 
 public class UserDAO {
-	// ログインできるならtrueを返す
+
 
     // ログイン
 	public User login(String id, String pw) {

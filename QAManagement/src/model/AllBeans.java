@@ -15,7 +15,7 @@ public class AllBeans implements Serializable {
 	private String q_content;
 	private String people;
 	private String category;
-	private String first;
+	private int first;
 	private String q_image;
 	private int a_id;
 	private String a_content;
@@ -89,10 +89,10 @@ public class AllBeans implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getFirst() {
+	public int getFirst() {
 		return first;
 	}
-	public void setFirst(String first) {
+	public void setFirst(int first) {
 		this.first = first;
 	}
 	public String getQ_image() {
