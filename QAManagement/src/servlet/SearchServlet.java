@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AnswerDAO;
 import dao.QuestionDAO;
 import dao.UserDAO;
 import model.AllBeans;
@@ -62,17 +63,18 @@ public class SearchServlet extends HttpServlet {
 		String user_class = request.getParameter("user_class");
 		String category = request.getParameter("category");
 		String people = request.getParameter("people");
+		int q_id = Integer.parseInt(request.getParameter("q_id"));
 
 
 
 		QuestionDAO qDAO = new QuestionDAO();
 		UserDAO uDAO = new UserDAO();
-
+		AnswerDAO aDAO = new AnswerDAO();
 
 		// ログインサーブレットからリダイレクト
 		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
 
-		if (request.getParameter("SUBMIT").equals("ログイン") || request.getParameter("FLG").equals("閲覧ページへ")) {
+		if (request.getParameter("login").equals("ログイン") || request.getParameter("FLG").equals("閲覧ページへ")) {
 
 
 			List<AllBeans> questionNowList = qDAO.defaultNow();
@@ -93,7 +95,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("SUBMIT").equals("左検索")) {
+		} else if(request.getParameter("search").equals("左検索")) {
 
 			// 閲覧ページ左側 検索ボックス
 
@@ -115,7 +117,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("SUBMIT").equals("個人検索")) {
+		} else if(request.getParameter("id_search").equals("個人検索")) {
 
 			// 個人絞り込み 検索
 
@@ -137,7 +139,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("SUBMIT").equals("名前検索")) {
+		} else if(request.getParameter("search_name").equals("名前検索")) {
 
 			// 個人絞り込み 名前検索
 
@@ -197,9 +199,19 @@ public class SearchServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			}
+		}else if (request.getParameter("answer").equals("回答ボタン")) {
+
+
+			List<AllBeans> answerList = aDAO.answer_left(q_id);
+			// 対応中検索結果をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
+
+			// 閲覧ページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer.jsp");
+			dispatcher.forward(request, response);
+
+
 		}
-
-
 
 	}
 }
