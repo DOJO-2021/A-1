@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.AnswerDAO;
 import dao.QuestionDAO;
 import dao.UserDAO;
 import model.AllBeans;
@@ -62,12 +63,12 @@ public class SearchServlet extends HttpServlet {
 		String user_class = request.getParameter("user_class");
 		String category = request.getParameter("category");
 		String people = request.getParameter("people");
-
+		int q_id = Integer.parseInt(request.getParameter("q_id"));
 
 
 		QuestionDAO qDAO = new QuestionDAO();
 		UserDAO uDAO = new UserDAO();
-
+		AnswerDAO aDAO = new AnswerDAO();
 
 		// ログインサーブレットからリダイレクト
 		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
@@ -197,8 +198,19 @@ public class SearchServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			}
-		}
+		}else if(request.getParameter("SUBMIT").equals("回答ボタン")) {
 
+			// 回答ページ左側
+
+			List<AllBeans> answerList  = aDAO.answer_left(q_id);
+			// 回答する質問内容をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
+
+
+			// 回答ページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer.jsp");
+			dispatcher.forward(request, response);
+		}
 
 
 	}
