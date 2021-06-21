@@ -136,7 +136,7 @@ public class UserDAO {
 
 
 	// 登録
-	public boolean insert(String user_id, String user_pw, String name, String user_class, String position, Timestamp r_date) {
+	public boolean insert(String user_id, String user_pw, String name, String user_class, String position) {
 		Connection conn = null;
 		boolean result = false;		//成功したらtrueに書き換える
 
@@ -149,7 +149,7 @@ public class UserDAO {
 
 			// SQL文を準備する
 
-			String sql = "insert into User values (?, ?, ?, ?, ?, ?)";
+			String sql = "insert into User values (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
@@ -164,7 +164,6 @@ public class UserDAO {
 
 				pStmt.setString(5, position);
 
-				pStmt.setTimestamp(6, r_date);
 
 
 			// SQL文を実行する
