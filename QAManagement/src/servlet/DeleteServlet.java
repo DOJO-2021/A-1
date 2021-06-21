@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.AnswerDAO;
 import dao.QuestionDAO;
-import model.User;
 
 /**
  * Servlet implementation class DeleteServlet
@@ -42,9 +42,9 @@ public class DeleteServlet extends HttpServlet {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") == null) {
-		    response.sendRedirect("/QAManagement/LoginServlet");
+			response.sendRedirect("/QAManagement/LoginServlet");
 			return;
-	}
+		}
 		// 削除処理
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
@@ -61,11 +61,48 @@ public class DeleteServlet extends HttpServlet {
 		// 回答者マイページ
 		if (request.getParameter("a_delete_button").equals("回答削除")) {
 
-		if(aDAO.delete(a_id))  {
-			// 対応中検索結果をリクエストスコープに格納
-			request.setAttribute("message", "削除しました。");
+			if(aDAO.delete(a_id))  {
+				// 削除の結果をリクエストスコープに格納
+				request.setAttribute("message", "削除しました。");
+
+				// resultページにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+				dispatcher.forward(request, response);
 
 
+			} else {
+				// 削除の失敗結果をリクエストスコープに格納
+				request.setAttribute("message", "削除に失敗しました。");
+
+				// resultページにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+				dispatcher.forward(request, response);
+
+
+			}
+
+			// 質問削除
+			// 質問者マイページ
+		} else if (request.getParameter("delete_button").equals("質問削除")) {
+
+				if(qDAO.delete(q_id))  {
+					// 削除の結果をリクエストスコープに格納
+					request.setAttribute("message", "削除しました。");
+
+					// resultページにフォワード
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+					dispatcher.forward(request, response);
+
+
+				} else {
+					// 削除の失敗結果をリクエストスコープに格納
+					request.setAttribute("message", "削除に失敗しました。");
+
+					// resultページにフォワード
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+					dispatcher.forward(request, response);
+				}
 		}
-		} else if (request.getParameter("a_delete_button").equals("回答削除"))
+	}
 }
+
