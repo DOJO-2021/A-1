@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;			// ※ArrayListはListを継承している
 import java.util.List;
 
@@ -196,7 +195,7 @@ public class UserDAO {
 
 
     // 更新
-	public boolean update(String user_id, String user_pw, String name, String user_class, String position, Timestamp r_date) {
+	public boolean update(String user_id, String user_pw, String name, String user_class) {
 		Connection conn = null;
 		boolean result = false;		//成功したらtrueに書き換える
 

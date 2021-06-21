@@ -56,13 +56,12 @@ public class UpdateServlet extends HttpServlet {
 		String user_pw = request.getParameter("user_pw");
 		String name = request.getParameter("name");
 		String user_class = request.getParameter("user_class");
-		String position = request.getParameter("position");
 
 
 		UserDAO uDAO = new UserDAO();
 
 
-		if(uDAO.update(user_id, user_pw, name, user_class, position)) {
+		if(uDAO.update(user_id, user_pw, name, user_class)) {
 			// 会員情報変更結果をリクエストスコープに格納
 			request.setAttribute("message", "会員情報を変更しました。");
 
