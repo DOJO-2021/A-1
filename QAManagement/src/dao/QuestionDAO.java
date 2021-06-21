@@ -444,7 +444,6 @@ public class QuestionDAO {
 	}
 
 
-
 	//閲覧ページ検索結果 対応済み質問絞り込み
 	public List<AllBeans> searchEnd(String q_content, String user_class, String category, String people) {
 
@@ -1029,7 +1028,7 @@ public class QuestionDAO {
 
 	// ！質問を削除！
 	// 引数idで指定されたレコードを削除し、成功したらtrueを返す
-	public boolean delete(int q_id) {
+	public boolean delete(int id) {
 		Connection conn = null;
 		boolean result = false;
 
@@ -1044,19 +1043,12 @@ public class QuestionDAO {
 			String sql = "delete from Question where q_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			//2つ目のSQL文を用意する
-			String sql2 = "delete from Answer where q_id=?";
-			PreparedStatement pStmt2 = conn.prepareStatement(sql2);
 			// SQL文を完成させる
-			pStmt.setInt(1, q_id);
-			pStmt2.setInt(1, q_id);
+			pStmt.setInt(1, id);
 
 			// SQL文を実行する
-			//もし両方とも削除が実行できたならば
-			if (pStmt.executeUpdate() >= 1) {
+			if (pStmt.executeUpdate() == 1) {
 				result = true;
-				int num = pStmt2.executeUpdate();
-				System.out.println(num);
 			}
 		}
 		catch (SQLException e) {
