@@ -108,7 +108,7 @@ public class RegistServlet extends HttpServlet {
 						request.setAttribute("message", "質問登録が失敗しました");
 
 						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 						dispatcher.forward(request, response);
 
 					}
@@ -122,7 +122,7 @@ public class RegistServlet extends HttpServlet {
 					} else {
 						request.setAttribute("message", "回答登録が失敗しました");
 						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 						dispatcher.forward(request, response);
 					}
 						//対応中・対応完了変更
@@ -132,7 +132,7 @@ public class RegistServlet extends HttpServlet {
 					} else {
 						request.setAttribute("message", "対応中・対応完了変更が失敗しました");
 						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/.jsp");
+						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 						dispatcher.forward(request, response);
 					}
 

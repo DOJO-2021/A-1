@@ -75,7 +75,7 @@ public class UpdateServlet extends HttpServlet {
 		request.setAttribute("message", "会員情報の変更に失敗しました。");
 
 		// resultページにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_result.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 		dispatcher.forward(request, response);
 
 	}

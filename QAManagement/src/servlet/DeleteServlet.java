@@ -66,7 +66,7 @@ public class DeleteServlet extends HttpServlet {
 				request.setAttribute("message", "削除しました。");
 
 				// resultページにフォワード
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 				dispatcher.forward(request, response);
 
 
@@ -75,7 +75,7 @@ public class DeleteServlet extends HttpServlet {
 				request.setAttribute("message", "削除に失敗しました。");
 
 				// resultページにフォワード
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 				dispatcher.forward(request, response);
 
 
@@ -90,7 +90,7 @@ public class DeleteServlet extends HttpServlet {
 					request.setAttribute("message", "削除しました。");
 
 					// resultページにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 					dispatcher.forward(request, response);
 
 
@@ -99,7 +99,7 @@ public class DeleteServlet extends HttpServlet {
 					request.setAttribute("message", "削除に失敗しました。");
 
 					// resultページにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/result.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
 					dispatcher.forward(request, response);
 				}
 		}

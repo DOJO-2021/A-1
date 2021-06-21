@@ -19,7 +19,7 @@ p{
 </head>
 <body>
 <div class="u_result">
-<p>会員情報を変更しました。</p>
+<p>${requestScope.message.name}</p>
 </div>
 </body>
 </html>
