@@ -8,11 +8,12 @@
 <link rel="stylesheet" href="/QAManagement/css/style.css">
 
 <style>
+/* テーブル */
 .userwrap {
 	margin: 0 auto 0 auto;
 	max-width: 960px;
 }
-/*  */
+/* テキストボックス */
 .box {
 	width: 250px;
 	height: 50px;
