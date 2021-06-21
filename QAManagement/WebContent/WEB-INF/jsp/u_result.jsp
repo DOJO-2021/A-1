@@ -19,7 +19,7 @@ p{
 </head>
 <body>
 <div class="u_result">
-<p>${requestScope.message.name}</p>
+<p>${requestScope.message}</p>
 </div>
 </body>
 </html>
