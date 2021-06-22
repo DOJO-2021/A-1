@@ -31,31 +31,33 @@ textarea {
 
 </style>
 </head>
+<jsp:include page="header.jsp"/>
 <body>
 
   <header>
   </header>
 
     <div class="wrapper">
+    <p>{message}</p>
     <form method="POST" action="">
       <table align="center">
         <tr>
           <td width="100" height="40">所属クラス</td>
-          <td width="80">aaaa
+          <td width="80">${sessionScope.user.user_class}
           </td>
           <td width="80">質問相手</td>
           <td width="80">
-            aaa
+            ${requestScope.position}
           </td>
         </tr>
         <tr>
           <td width="100" height="40">優先度</td>
           <td>
-            aaa
+            ${requestScope.first}
           </td>
           <td width="80">カテゴリー</td>
           <td width="80">
-            aaa
+            ${requestScope.category}
           </td>
         </tr>
         <tr>
@@ -65,16 +67,14 @@ textarea {
         <tr>
           <td width="100" height="40">内容</td>
           <td colspan="3">
-             aaaaaaaaaa<br>
-             aaaaaaaaaa<br>
-             aaaaaaaaaa<br>
+             ${requestScope.q_content}
           </td>
 
         </tr>
 
       </table>
 
-        <a href="/QAManagement/SearchServlet" class="">戻る</a>
+        <a href="/QAManagement/SearchServlet?FLG=閲覧ページへ" class="">戻る</a>
 
     </form>
   </div>
@@ -92,4 +92,5 @@ function previewImage(obj)
 
 </script>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>
