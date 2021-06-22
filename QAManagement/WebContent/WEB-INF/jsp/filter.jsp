@@ -19,33 +19,22 @@
 </style>
 </head>
 <body>
-
-  <c:forEach var="e" items="${cardList }">
-    <form method="POST" action="/QAManagement/SearchServlet">
+<form method="POST" action="/QAManagement/SearchServlet" ID="filter">
+  <c:forEach var="e" items="${filterList}">
       <table align="center" class="balloon">
         <tr>
-          <td>氏名
+          <td>氏名:${e.name}
           </td>
-          <td>aaaa
+          <td>登録日:${e.r_date}
           </td>
-          <td>年度
+          <td>クラス:${e.user_class}
           </td>
-          <td>aaaa
-          </td>
-          <td>クラス
-          </td>
-          <td>aaaaaaaaaaaa
-          </td>
-          <td><input type="radio" name=p_radio value="" checked>
+          <td><input type="radio" name=user_id value = "${e.user_id}">
           </td>
         </tr>
-
       </table>
-
     </c:forEach>
-
-        <input type="submit" class="" name="id_search" value="検索"></input>
-
     </form>
+    <input type="submit" class="" name="id_search" value="個人検索" form = "filter"></input>
 </body>
 </html>

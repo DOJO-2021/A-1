@@ -63,7 +63,7 @@ public class SearchServlet extends HttpServlet {
 		String user_class = request.getParameter("user_class");
 		String category = request.getParameter("category");
 		String people = request.getParameter("people");
-		int q_id = Integer.parseInt(request.getParameter("q_id"));
+		int q_id;
 
 
 
@@ -75,7 +75,7 @@ public class SearchServlet extends HttpServlet {
 		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
 
 		if (request.getParameter("login").equals("ログイン") || request.getParameter("FLG").equals("閲覧ページへ")) {
-
+			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 			List<AllBeans> questionNowList = qDAO.defaultNow();
 			// 対応中検索結果をリクエストスコープに格納
@@ -89,6 +89,9 @@ public class SearchServlet extends HttpServlet {
 			// 対応済み検索結果をリクエストスコープに格納
 			request.setAttribute("questionEndList",questionEndList);
 
+			List<AllBeans> answerList = aDAO.list_answer();
+			//返信をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
 
 			// 閲覧ページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
@@ -96,20 +99,26 @@ public class SearchServlet extends HttpServlet {
 
 
 		} else if(request.getParameter("search").equals("左検索")) {
+			 q_id = Integer.parseInt(request.getParameter("q_id"));
+
 
 			// 閲覧ページ左側 検索ボックス
 
-			List<AllBeans> searchNowList = qDAO.searchNow(q_content,user_class,category,people);
+			List<AllBeans> questionNowList = qDAO.searchNow(q_content,user_class,category,people);
 			// 対応中検索結果をリクエストスコープに格納
-			request.setAttribute("searchNowList",searchNowList);
+			request.setAttribute("questionNowList",questionNowList);
 
-			List<AllBeans> searchYetList = qDAO.searchYet(q_content,user_class,category,people);
+			List<AllBeans> questionYetList = qDAO.searchYet(q_content,user_class,category,people);
 			// 未対応検索結果をリクエストスコープに格納
-			request.setAttribute("searchYetList",searchYetList);
+			request.setAttribute("questionYetList",questionYetList);
 
-			List<AllBeans> searchEndList = qDAO.searchEnd(q_content,user_class,category,people);
+			List<AllBeans> questionEndList = qDAO.searchEnd(q_content,user_class,category,people);
 			// 対応済み検索結果をリクエストスコープに格納
-			request.setAttribute("searchEndList",searchEndList);
+			request.setAttribute("questionEndList",questionEndList);
+
+			List<AllBeans> answerList = aDAO.list_answer();
+			//返信をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
 
 
 			// 閲覧ページにフォワード
@@ -118,20 +127,26 @@ public class SearchServlet extends HttpServlet {
 
 
 		} else if(request.getParameter("id_search").equals("個人検索")) {
+			 q_id = Integer.parseInt(request.getParameter("q_id"));
+
 
 			// 個人絞り込み 検索
 
-			List<AllBeans> idNowList = qDAO.idNow(user_id);
+			List<AllBeans> questionNowList = qDAO.idNow(user_id);
 			// 対応中検索結果をリクエストスコープに格納
-			request.setAttribute("idNowList",idNowList);
+			request.setAttribute("questionNowList",questionNowList);
 
-			List<AllBeans> idYetList = qDAO.idYet(user_id);
+			List<AllBeans> questionYetList = qDAO.idYet(user_id);
 			// 未対応検索結果をリクエストスコープに格納
-			request.setAttribute("idYetList",idYetList);
+			request.setAttribute("questionYetList",questionYetList);
 
-			List<AllBeans> idEndList = qDAO.idEnd(user_id);
+			List<AllBeans> questionEndList = qDAO.idEnd(user_id);
 			// 対応済み検索結果をリクエストスコープに格納
-			request.setAttribute("idEndList",idEndList);
+			request.setAttribute("questionEndList",questionEndList);
+
+			List<AllBeans> answerList = aDAO.list_answer();
+			//返信をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
 
 
 			// 閲覧ページにフォワード
@@ -140,6 +155,7 @@ public class SearchServlet extends HttpServlet {
 
 
 		} else if(request.getParameter("search_name").equals("名前検索")) {
+			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 			// 個人絞り込み 名前検索
 
@@ -158,6 +174,8 @@ public class SearchServlet extends HttpServlet {
 			// 受講者だったとき
 
 			if(user.getPosition().equals("受講者") ){
+				 q_id = Integer.parseInt(request.getParameter("q_id"));
+
 
 				List<AllBeans> q_idNowList = qDAO.idNow(user_id);
 				// 対応中検索結果をリクエストスコープに格納
@@ -171,6 +189,10 @@ public class SearchServlet extends HttpServlet {
 				// 対応済み検索結果をリクエストスコープに格納
 				request.setAttribute("q_idEndList",q_idEndList);
 
+				List<AllBeans> answerList = aDAO.list_answer();
+				//返信をリクエストスコープに格納
+				request.setAttribute("answerList",answerList);
+
 
 				// 質問者マイページにフォワード
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/q_mypage.jsp");
@@ -178,6 +200,8 @@ public class SearchServlet extends HttpServlet {
 
 
 			} else {
+				 q_id = Integer.parseInt(request.getParameter("q_id"));
+
 
 				// 回答者だったとき
 
@@ -194,12 +218,18 @@ public class SearchServlet extends HttpServlet {
 				request.setAttribute("q_answerEndList",q_answerEndList);
 
 
+				List<AllBeans> answerList = aDAO.list_answer();
+				//返信をリクエストスコープに格納
+				request.setAttribute("answerList",answerList);
+
+
 				// 回答者マイページにフォワード
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/a_mypage.jsp");
 				dispatcher.forward(request, response);
 
 			}
 		}else if (request.getParameter("answer").equals("回答ボタン")) {
+			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 
 			List<AllBeans> answerList = aDAO.answer_left(q_id);

@@ -92,13 +92,13 @@ public class AnswerDAO {
 
 			// SQL文を完成させる
 
-				pStmt.setString(1, a_content);		//1つ目の?(=NAME)に入力値をいれる
+			pStmt.setString(1, a_content);		//1つ目の?(=NAME)に入力値をいれる
 
-				pStmt.setString(2, a_image);
+			pStmt.setString(2, a_image);
 
-				pStmt.setInt(3, q_id);
+			pStmt.setInt(3, q_id);
 
-				pStmt.setString(4, user_id);
+			pStmt.setString(4, user_id);
 
 
 
@@ -175,5 +175,68 @@ public class AnswerDAO {
 
 		// 結果を返す
 		return result;
+	}
+
+
+	public List<AllBeans> list_answer() {
+
+		List<AllBeans> answerList = new ArrayList<AllBeans>();
+
+		Connection conn = null;			//初期値を空っぽに
+
+		try {
+			// JDBCドライバを読み込む h2を使う
+			Class.forName("org.h2.Driver");
+
+			// データベースに接続する	connに値が入れられる＝接続されている状態
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/A-1/QAManagement/QADB", "sa", "momoka");
+
+			// SELECT文を準備する		ユーザーが入れてくる情報を?にしておく
+			// 絞り込み検索用SQL
+			String sql = "select * from answer left outer join question on answer.q_id = question.q_id left outer join user on answer.u_id = user.u_id order by answer.a_id asc;";
+			PreparedStatement pStmt = conn.prepareStatement(sql);		// PreparedStatementが無害化して↓
+
+
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+
+			// 次のデータ、次のデータ・・順に
+			while (rs.next()) {
+				AllBeans allBeans = new AllBeans();		// JavaBeansをインスタンス化してデータを入れる箱として利用
+				allBeans.setName(rs.getString("name"));
+				allBeans.setA_content(rs.getString("a_content"));
+				allBeans.setPosition(rs.getString("position"));
+				allBeans.setPosition(rs.getString("a_id"));
+				allBeans.setPosition(rs.getString("a_image"));
+				allBeans.setPosition(rs.getString("q_id"));
+
+				answerList.add(allBeans);		// ArrayListに入れなおす（みんな知ってるから）
+			}
+
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+
+		}
+		finally {
+			// データベースを切断
+			if (conn != null) {			// conn がnullでない＝データベースに接続されている
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+					e.printStackTrace();
+
+				}
+			}
+		}
+
+		// 結果を返す
+		return answerList;   //
 	}
 }
