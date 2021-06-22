@@ -10,6 +10,7 @@
 <style>
 /* テーブル */
 .userwrap {
+    border:1px solid #ffa500;"
 	margin: 0 auto 0 auto;
 	max-width: 960px;
 }
@@ -67,7 +68,7 @@
 	</script>
 
 </body>
-		<!-- footerインクルード -->
+        <!-- footerインクルード -->
 		<jsp:include page="footer.jsp" />
 
 </html>
