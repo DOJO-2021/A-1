@@ -50,11 +50,6 @@
 
 	</main>
 
-	<footer class="footer">
-		<jsp:include page="/footer.jsp" />
-		<!-- footerインクルード -->
-	</footer>
-
 
 
 	<script>
@@ -72,4 +67,7 @@
 	</script>
 
 </body>
+		<!-- footerインクルード -->
+		<jsp:include page="footer.jsp" />
+
 </html>
