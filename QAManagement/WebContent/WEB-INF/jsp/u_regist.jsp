@@ -111,10 +111,11 @@
 
 		<p id="error_msg"></p>
 		<script>
+		// sumitボタンが押されたら「クリックされました」というメッセージを表示
+		// 登録ボタン押されたとき項目の記入がないと入力するよう警告
+
+		    // エラーメッセージ「内容をすべて入力してください」
 			'use strict';
-			// sumitボタンが押されたら「クリックされました」というメッセージを表示
-			// 登録ボタン押されたとき項目の記入がないと入力するよう警告
-			// エラーメッセージ「内容をすべて入力してください」
 			document.getElementById('form').onsubmit = function(event) {
 				const people = document.getElementById('form').people.value;
 				const user_class = document.getElementById('form').user_class.value;
@@ -129,8 +130,9 @@
 				}
 			};
 
-			'use strict';
+
 			// エラーメッセージ「PWと確認用PWが一致しません」
+			'use strict';
 			document.getElementById('form').onsubmit = function(event) {
 				const PW = document.getElementById('form').PW.value;
 				const conPW = document.getElementById('form').conPW.value;
@@ -141,15 +143,16 @@
 				}
 			};
 
-			'use strict';
+
 			// エラーメッセージ「回答者用PWが一致しません」
+			'use strict';
 			document.getElementById('form').onsubmit = function(event) {
 				const PW = document.getElementById('form').PW.value;
 				const conPW = document.getElementById('form').conPW.value;
 
 				if (PW !== conPW) {
 					event.preventDefault();
-					document.getElementById('error_msg').textContent = 'PWと確認用PWが一致しません';
+					document.getElementById('error_msg').textContent = '回答者用PWが一致しません';
 				}
 			};
 		</script>
