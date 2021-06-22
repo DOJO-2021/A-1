@@ -40,12 +40,7 @@ public class RegistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 				HttpSession session = request.getSession();
-				if (session.getAttribute("user") == null) {
-					response.sendRedirect("/QAManagement/LoginServlet");
-					return;
-				}
 
 				request.setCharacterEncoding("UTF-8");
 				User user = (User)session.getAttribute("user");
@@ -58,12 +53,12 @@ public class RegistServlet extends HttpServlet {
 				String user_pw = request.getParameter("user_pw");
 				String position = request.getParameter("position");
 				String people = request.getParameter("people");
-				int first = Integer.parseInt(request.getParameter("first"));
+
 				String q_image = request.getParameter("q_image");
-				int a_id = Integer.parseInt(request.getParameter("a_id"));
+
 				String a_content = request.getParameter("a_content");
 				String a_image = request.getParameter("a_image");
-				int q_id = Integer.parseInt(request.getParameter("q_id"));
+
 				String situation = request.getParameter("situation");
 
 
@@ -90,7 +85,13 @@ public class RegistServlet extends HttpServlet {
 					}
 
 					//質問登録
-				} else if(request.getParameter("quest_button").equals("質問登録")) {
+				}
+				//ログインしていなかったらログインページへ
+				if (session.getAttribute("user") == null) {
+					response.sendRedirect("/QAManagement/LoginServlet");
+					return;
+				}else if(request.getParameter("quest_button").equals("質問登録")) {
+					int first = Integer.parseInt(request.getParameter("first"));
 					if(qDAO.insert(people, category, first, q_image, q_content, user_id)) {
 						request.setAttribute("message", "質問登録が完了しました");
 						request.setAttribute("people", people);
@@ -114,6 +115,7 @@ public class RegistServlet extends HttpServlet {
 					}
 					//回答登録
 				} else if(request.getParameter("rp_button").equals("回答登録")) {
+					int q_id = Integer.parseInt(request.getParameter("q_id"));
 					if(aDAO.insert(a_content, a_image, q_id, user_id)) {
 						request.setAttribute("message", "回答登録が完了しました");
 						request.setAttribute("a_content", a_content);

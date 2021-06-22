@@ -47,40 +47,27 @@ input[name=rp_reply]{
 }
 </style>
 </head>
+<jsp:include page="header.jsp"/>
 <body>
 <h2>回答ページ</h2>
 <table class="qatable">
 	<tr>
-		<td class ="mt">クラス：<label>A</label>相手：<label>事務局</label>名前：<label>近藤隆矢</label></td>
+		<td class ="mt">クラス：<label><c:out value="${answerList[0].user_class}" /></label>相手：<label>相手<c:out value="${answerList[0].people}" /></label>名前：<label>名前<c:out value="${answerList[0].name}" /></label></td>
 	</tr>
 	<tr>
-		<td class ="mt">優先度：<label>3</label>カテゴリー：<label>機材</label></td>
+		<td class ="mt">優先度：<label><c:out value="${answerList[0].first}" /></label>カテゴリー：<label><c:out value="${answerList.[0]category}" /></label></td>
 	</tr>
 	<tr>
-		<td class ="mt">質問内容<div class = "qcontent"><p>ｐｃトラブルで講義が受けられません。どの様に対処すればよいですか</p></div></td>
-	</tr>
-	<tr>
-		<td class ="mt">回答内容<div class = "qcontent"><p>承知しました。新しいＰＣを配送しますああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</p></div></td>
-	</tr>
-	<!--
-	<tr>
-		<td class ="mt">クラス：<label><c:out value="${question.classes}" /></label>相手：<label>相手<c:out value="${question.people}" /></label>名前：<label>名前<c:out value="${question.name}" /></label</td>
-	</tr>
-	<tr>
-		<td class ="mt">優先度：<label><c:out value="${question.first}" /></label>カテゴリー：<label><c:out value="${question.category}" /></label></td>
-	</tr>
-	<tr>
-		<td class ="mt">質問内容<div class = "qcontent"><p><c:out value="${question.q_content}" /></p></div></td>
+		<td class ="mt">質問内容<div class = "qcontent"><p><c:out value="${answerList[0].q_content}" /></p></div></td>
 	</tr>
 	<c:forEach var = "e" items = "${answerList}">
 	<tr>
-		<td class ="mt">回答内容<div class = "qcontent"><p><c:out value="${answer.a_content}" /></p></div></td>
+		<td class ="mt">回答内容<div class = "qcontent"><p><c:out value="${e.a_content}" /></p></div></td>
 	</tr>
 	</c:forEach>
--->
 </table>
 <div class ="answerwrap">
-<form method="POST" action="/QAManagement/RegistServlet">
+<form id="a_form" method="POST" action="/QAManagement/RegistServlet">
 <table class ="answerform">
 	<tr>
 		<td>返信内容<br><textarea name="rp_reply" rows="10" cols="100">返信内容</textarea></td>
@@ -88,16 +75,32 @@ input[name=rp_reply]{
 	<tr>
 		<td>
 		<p>
-			<label class ="situation"><input type="radio" name="situation" value="rp_now"> 対応中</label>
-			<label class ="situation"><input type="radio" name="situation" value="rp_complete"> 対応完了</label>
+			<label class ="situation"><input type="radio" name="situation" value="対応中"> 対応中</label>
+			<label class ="situation"><input type="radio" name="situation" value="対応完了"> 対応完了</label>
 		</p>
 		</td>
 	</tr>
 	<tr>
-		<td><input type="submit" name="rp_button" value="返信する"></td>
+		<td><input type="submit" name="rp_button" value="回答登録"></td>
+	</tr>
+	<tr>
+		<td><p id="form_error"></p></td>
 	</tr>
 </table>
 </form>
 </div>
 </body>
+<jsp:include page="footer.jsp"/>
+<script>
+'use strict';
+//変更ボタン押下時エラー
+document.getElementById('a_form').onsubmit = function(event){
+  const rp_reply = document.getElementById('a_form').rp_reply.value;
+  if(rp_reply === ""){
+  	event.preventDefault();
+ 	document.getElementById('form_error').textContent = '※回答内容を入力してください';
+  }
+};
+
+</script>
 </html>

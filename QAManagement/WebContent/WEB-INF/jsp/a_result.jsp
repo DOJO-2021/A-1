@@ -19,30 +19,23 @@ tr{
 <meta charset="UTF-8">
 <title>QAManagement</title>
 </head>
+<jsp:include page="header.jsp"/>
 <body>
 <div class="a_resultwrap">
-<p>以下の内容で回答しました。</p>
+<p><c:out value="${message}"></c:out></p>
 <div class ="answerwrap">
 <table class ="answerform">
 	<tr>
-		<td>返信内容<br><p>承知しました。新しいＰＣを配送しますああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</p></td>
+		<td>返信内容<br><p><c:out value="${a_content}" /></p></td>
 	</tr>
 	<tr>
-		<td>状態：<label>対応中</label></td>
-	</tr>
-</table>
-<!--
-<table class ="answerform">
-	<tr>
-		<td>返信内容<br><p><c:out value="${answer.a_content}" /></p></td>
-	</tr>
-	<tr>
-		<td>状態：<label><c:out value="${question.situation}" /></label></td>
+		<td>状態：<label><c:out value="${situation}" /></label></td>
 	</tr>
 </table>
 -->
-<a href ="/QAManagement/SearchServlet">閲覧ページに戻る</a>
+<a href ="/QAManagement/SearchServlet?FLG=閲覧ページへ">閲覧ページに戻る</a>
 </div>
 </div>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>
