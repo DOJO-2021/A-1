@@ -9,12 +9,11 @@
 .answerform{
 	background-color:#ffd700;
 }
-table{
-	max-width:500px;
-}
+
 tr{
 	background-color:#ffffe0;
 }
+
 </style>
 <meta charset="UTF-8">
 <title>QAManagement</title>
@@ -26,13 +25,14 @@ tr{
 <div class ="answerwrap">
 <table class ="answerform">
 	<tr>
-		<td>返信内容<br><p><c:out value="${a_content}" /></p></td>
+		<td width="100" height="40">返信内容</td>
+    <td width="100" height="40"><p><c:out value="${a_content}" /></p></td>
 	</tr>
 	<tr>
-		<td>状態：<label><c:out value="${situation}" /></label></td>
+		<td width="100" height="40">状態：</td>
+    <td width="100" height="40"><c:out value="${situation}" /></td>
 	</tr>
 </table>
--->
 <a href ="/QAManagement/SearchServlet?FLG=閲覧ページへ">閲覧ページに戻る</a>
 </div>
 </div>

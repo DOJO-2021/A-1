@@ -14,14 +14,36 @@ textarea {
 .wrapper {
   width: 700px;
   height: 400px;
-  background: #a9a9a9;
+  background: #fffacd;
   margin-left: auto;
   margin-right: auto;
   margin-top: 100px;
+  border-style: solid;
+  border-color: #f5deb3;
+
 
 
 }
+table{
+  margin:50px auto auto auto ;
 
+}
+
+.btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #f8ead1;
+  border: solid 2px #e2a654;
+  border-radius: 3px;
+  transition: .4s;
+  background: #e2a654;
+}
+
+.btn-flat-border:hover {
+  background: #ebcaa3;
+  color: #644111;
+}
 
 
 </style>
@@ -34,14 +56,14 @@ textarea {
 
     <div class="wrapper">
     <form method="POST" action="/QAManagement/RegistServlet" id="form">
-      <table align="center">
+      <table>
         <tr>
           <td width="100" height="40">クラス</td>
-          <td width="80">${sessionScope.user.user_class}
+          <td width="80"><c:out value="${sessionScope.user.user_class}" />
           </td>
           <td width="80">質問相手</td>
           <td width="80">
-            <select name="potion">
+            <select name="position" >
               <option value="">相手</option>
               <option value="講師">講師</option>
               <option value="事務局">事務局</option>
@@ -85,13 +107,9 @@ textarea {
 
         </tr>
         <tr>
-          <th colspan="3">
-            <input type="file" name="q_image" accept="image/jpeg, image/png" onchange="previewImage(this);">
-              <br>
-              <img id="preview" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" style="max-width:200px;">
-          </th>
-          <th colspan="2">
-              <input type="submit" name="quest_button" value="質問登録"><br>
+
+          <th colspan="4" height="40px">
+              <input type="submit" name="quest_button" class="btn-flat-border" value="質問登録" onclick="return checkData()"><br>
               <p id=error></p>
           </th>
         </tr>
@@ -102,8 +120,7 @@ textarea {
 
 <script>
 'use strict';
-function previewImage(obj)
-{
+function previewImage(obj) {
 	var fileReader = new FileReader();
 	fileReader.onload = (function() {
 		document.getElementById('preview').src = fileReader.result;
@@ -112,13 +129,17 @@ function previewImage(obj)
 }
 
 //質問登録ボタン押されたとき必須項目の記入がないと必須項目を入力するよう警告
-document.getElementById('form').onsubmit = function(event){
+function checkData(){
   const position = document.getElementById('form').position.value;
   const first = document.getElementById('form').first.value;
   const category = document.getElementById('form').category.value;//←NAMEは固有値
-  if(position === "" || forst === "" || category === "" ){
+  if(position === "" || first === "" || category === "" ){
   	event.preventDefault();
- 	document.getElementById('error').textContent = '※内容を全て入力してください';
+ 	  document.getElementById('error').textContent = '※内容を全て入力してください';
+
+    return false;
+  }else{
+    return true;
   }
 };
 
@@ -127,3 +148,4 @@ document.getElementById('form').onsubmit = function(event){
 </body>
 <jsp:include page="footer.jsp"/>
 </html>
+
