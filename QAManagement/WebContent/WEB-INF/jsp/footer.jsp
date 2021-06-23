@@ -7,8 +7,14 @@
 <title>QAManagement</title>
 <style>
 footer{
-	padding-bottom:60px;
-	background-color:#cccccc;
+	/* padding-bottom:30px; */
+	margin-top: 80px;
+	background-color:#fafafa;
+	text-align: right;
+	border-bottom: 20px solid #dadada;		/* 外枠 */
+}
+p {
+	padding-top: 50px;
 }
 </style>
 </head>
