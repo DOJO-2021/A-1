@@ -79,16 +79,18 @@ public class SearchServlet extends HttpServlet {
 			List<AllBeans> questionNowList = qDAO.defaultNow();
 			// 対応中検索結果をリクエストスコープに格納
 			request.setAttribute("questionNowList",questionNowList);
-
+			System.out.println(questionNowList.size() + "cccccccccc");
 			List<AllBeans> questionYetList = qDAO.defaultYet();
 			// 未対応検索結果をリクエストスコープに格納
 			request.setAttribute("questionYetList",questionYetList);
+			System.out.println(questionYetList.size() + "ddddddddddd");
 
 			List<AllBeans> questionEndList = qDAO.defaultEnd();
 			// 対応済み検索結果をリクエストスコープに格納
 			request.setAttribute("questionEndList",questionEndList);
 
 			List<AllBeans> answerList = aDAO.list_answer();
+			System.out.println(answerList.size()+"aaaaaaaaaa");
 			//返信をリクエストスコープに格納
 			request.setAttribute("answerList",answerList);
 
@@ -213,6 +215,7 @@ public class SearchServlet extends HttpServlet {
 				request.setAttribute("q_idEndList",q_idEndList);
 
 				List<AllBeans> answerList = aDAO.list_answer();
+
 				//返信をリクエストスコープに格納
 				request.setAttribute("answerList",answerList);
 

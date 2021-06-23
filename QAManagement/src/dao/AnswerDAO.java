@@ -207,9 +207,9 @@ public class AnswerDAO {
 				allBeans.setName(rs.getString("name"));
 				allBeans.setA_content(rs.getString("a_content"));
 				allBeans.setPosition(rs.getString("position"));
-				allBeans.setPosition(rs.getString("a_id"));
-				allBeans.setPosition(rs.getString("a_image"));
-				allBeans.setPosition(rs.getString("q_id"));
+				allBeans.setA_id(rs.getInt("a_id"));
+				allBeans.setA_image(rs.getString("a_image"));
+				allBeans.setQ_id(rs.getInt("q_id"));
 
 				answerList.add(allBeans);		// ArrayListに入れなおす（みんな知ってるから）
 			}
