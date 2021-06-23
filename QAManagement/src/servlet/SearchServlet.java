@@ -73,11 +73,34 @@ public class SearchServlet extends HttpServlet {
 
 		// ログインサーブレットからリダイレクト
 		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
+		System.out.println(request.getParameter("login")+"←ろぐいん");
+		System.out.println(request.getParameter("FLG"+"フラグ"));
+		if(request.getParameter("login")==null && request.getParameter("FLG")==null) {
+			List<AllBeans> questionNowList = qDAO.defaultNow();
+			// 対応中検索結果をリクエストスコープに格納
+			request.setAttribute("questionNowList",questionNowList);
 
-		if (request.getParameter("login").equals("ログイン") || request.getParameter("FLG").equals("閲覧ページへ")) {
-			 q_id = Integer.parseInt(request.getParameter("q_id"));
+			List<AllBeans> questionYetList = qDAO.defaultYet();
+			// 未対応検索結果をリクエストスコープに格納
+			request.setAttribute("questionYetList",questionYetList);
+
+			List<AllBeans> questionEndList = qDAO.defaultEnd();
+			// 対応済み検索結果をリクエストスコープに格納
+			request.setAttribute("questionEndList",questionEndList);
+
+			List<AllBeans> answerList = aDAO.list_answer();
+			//返信をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
+
+			// 閲覧ページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
+			dispatcher.forward(request, response);
+		}else if (request.getParameter("login").equals("ログイン") || request.getParameter("FLG").equals("閲覧ページへ")) {
+
 
 			List<AllBeans> questionNowList = qDAO.defaultNow();
+			System.out.println(questionNowList.size());
+
 			// 対応中検索結果をリクエストスコープに格納
 			request.setAttribute("questionNowList",questionNowList);
 

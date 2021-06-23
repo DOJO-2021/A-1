@@ -24,12 +24,15 @@
 </head>
 <body>
 	<main>
-
+		<a href = "/QAManagement/URegistServlet">会員登録</a>
 		<form method="POST" action="/QAManagement/LoginServlet" id="form">
 			<table class="userwrap">
 				<tr>
 					<th>ID</th>
-					<td><input type="text" name="id_input" class="box"><br></td>
+					<td>
+						<input type="text" name="id_input" class="box"><br>
+						<input type="hidden" name="FLG" value="aaa">
+					</td>
 				</tr>
 
 				<tr>

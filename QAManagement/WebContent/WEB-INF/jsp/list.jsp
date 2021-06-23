@@ -99,15 +99,15 @@ table {
 	</div>
 	<div class="list">
 		<c:forEach var="e" items="${questionNowList}">
-			<form method="GET" action="/QAManagement/SearchServlet">
+			<form method="POST" action="/QAManagement/SearchServlet">
 				<table class="line">
 					<tr>
 						<td><strong>${e.user_class}</strong><input type="hidden" name="user_id" value="${e.user_class}"><br></td>
 
 						<td><strong>${e.people}</strong><input type="hidden" name="people" value="${e.people}"><br></td>
-						<c:when test="${sessionScope.user.position != 受講者}">
+						<c:if test="${sessionScope.user.position != 受講者}">
 							<td><strong>${e.name}</strong><input type="hidden" name="name" value="${e.name}"><br></td>
-						</c:when>
+						</c:if>
 						<td><strong>${e.category}</strong><input type="hidden" name="category"
 							value="{e.category}"><br></td>
 
@@ -123,8 +123,8 @@ table {
 			<div class="hidden">
 				<table class="line">
 					<tr>
-						<td><strong>{e.q_content}</strong><input type="hidden" name="q_content"
-							value="{e.q_content}"><br></td>
+						<td><strong>${e.q_content}</strong><input type="hidden" name="q_content"
+							value="${e.q_content}"><br></td>
 						<td class="delete"><input type="submit"
 							name="q_delete_button" value="質問削除"></td>
 					</tr>
@@ -143,12 +143,12 @@ table {
 								<c:when test="${requestScope.user.position != 受講者}">
 								<td></td>
 								</c:when>
-								<td><strong>{f.a_content}</strong><input type="hidden" name=""
-									value="{f.a_content}"><br></td>
+								<td><strong>${f.a_content}</strong><input type="hidden" name=""
+									value="${f.a_content}"><br></td>
 							</tr>
 							<tr>
-								<td><strong>{f.a_image}</strong><input type="hidden" name=""
-									value="{f.a_image}"><br></td>
+								<td><strong>${f.a_image}</strong><input type="hidden" name=""
+									value="${f.a_image}"><br></td>
 							</tr>
 						</table>
 						</c:if>
@@ -161,7 +161,7 @@ table {
 
 		<div class="list">
 		<c:forEach var="g" items="${questionYetList}">
-			<form method="GET" action="/QAManagement/SearchServlet">
+			<form method="POST" action="/QAManagement/SearchServlet">
 				<table class="line">
 					<tr>
 						<td><strong>${g.user_class}</strong><input type="hidden" name="user_id" value="${g.user_class}"><br></td>
@@ -171,7 +171,7 @@ table {
 							<td><strong>${g.name}</strong><input type="hidden" name="name" value="${g.name}"><br></td>
 						</c:when>
 						<td><strong>${g.category}</strong><input type="hidden" name="category"
-							value="{g.category}"><br></td>
+							value="${g.category}"><br></td>
 
 						<td><strong>${g.first}</strong><input type="hidden" name="first"
 							value="${g.first}"><br></td>
@@ -185,15 +185,15 @@ table {
 			<div class="hidden">
 				<table class="line">
 					<tr>
-						<td><strong>{g.q_content}</strong><input type="hidden" name="q_content"
-							value="{g.q_content}"><br></td>
+						<td><strong>${g.q_content}</strong><input type="hidden" name="q_content"
+							value="${g.q_content}"><br></td>
 						<td class="delete"><input type="submit"
 							name="q_delete_button" value="質問削除"></td>
 					</tr>
 					<c:if test = "items = ${g.q_image != null }">
 					<tr>
-						<td><strong>{g.q_image}</strong><input type="hidden" name=""
-							value=""><br></td>
+						<td><strong>${g.q_image}</strong><input type="hidden" name=""
+							value="${g.q_image}"><br></td>
 					</tr>
 					</c:if>
 				</table>
@@ -223,7 +223,7 @@ table {
 
 			<div class="list">
 		<c:forEach var="i" items="${questionEndList}">
-			<form method="GET" action="/QAManagement/SearchServlet">
+			<form method="POST" action="/QAManagement/SearchServlet">
 				<table class="line">
 					<tr>
 						<td><strong>${i.user_class}</strong><input type="hidden" name="user_id" value="${i.user_class}"><br></td>

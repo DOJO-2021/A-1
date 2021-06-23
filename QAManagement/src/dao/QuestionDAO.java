@@ -90,7 +90,7 @@ public class QuestionDAO {
 
 			// SELECT文を準備する		ユーザーが入れてくる情報を?にしておく
 			// 絞り込み検索用SQL
-			String sql = "select DISTINCT * from User JOIN Question ON User.user_id=Question.user_id LEFT JOIN Answer ON Qusetion.q_id=Answer.q_id WHERE Question.situation='対応中' ORDER BY Question.first desc";
+			String sql = "select DISTINCT * from User JOIN Question ON User.user_id=Question.user_id LEFT JOIN Answer ON Question.q_id=Answer.q_id WHERE Question.situation='対応中' ORDER BY Question.first desc";
 			PreparedStatement pStmt = conn.prepareStatement(sql);		// PreparedStatementが無害化して↓
 
 
