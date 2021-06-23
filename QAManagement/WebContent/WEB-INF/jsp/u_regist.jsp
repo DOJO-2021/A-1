@@ -13,36 +13,32 @@
 }
 </style>
 </head>
-<jsp:include page="footer.jsp">
 	<body>
 
-
-		<!-- header -->
 		<header style="padding: padding 20px;">
 
-			<imag src="" alt="QAManagement"> <a
-				href="/QAManagement/login.jsp/" style="text-align: right">ログイン画面に戻る</a>
+			<img src="" alt="QAManagement">
 		</header>
 		<h1>会員登録</h1>
-		<form id="form" method="POST" action="/QAManagement">
+		<form method="POST" action="/QAManagement/RegistServlet" id="form">
 
 
 			<div>
 				<table class="userwrap">
-					<tr>
-						<select name="people" style="background-color: #FFEFD8">
+					<tr><td>
+						<select name="position" style="background-color: #FFEFD8" >
 							<option>立場選択</option>
 							<option value="受講生">受講生</option>
 							<option value="講師・事務局">講師・事務局</option>
 						</select>
-					</tr>
+					</td></tr>
 				</table>
 			</div>
 
 
 			<div>
 				<table class="userwrap">
-					<tr>
+					<tr><td>
 						<select name="user_class" style="background-color: #FFEFD8">
 							<option>クラス選択</option>
 							<option value="Aクラス">Aクラス</option>
@@ -54,7 +50,7 @@
 							<option value="Gクラス">Gクラス</option>
 							<option value="事務局">事務局</option>
 						</select>
-					</tr>
+					</td></tr>
 				</table>
 			</div>
 
@@ -70,7 +66,7 @@
 
 				<table class="userwrap">
 					<tr>
-						<th>ID<input type="text" name="ID" placeholder="ID"
+						<th>ID<input type="text" name="user_id" placeholder="ID"
 							style="background-color: #DEEFF9">
 						</th>
 					</tr>
@@ -78,7 +74,7 @@
 
 				<table class="userwrap">
 					<tr>
-						<th>PW<input type="password" name="PW" placeholder="PW"
+						<th>PW<input type="password" name="user_pw" placeholder="PW"
 							style="background-color: #DEEFF9">
 						</th>
 					</tr>
@@ -96,16 +92,17 @@
 					<tr>
 						<th>回答者用PW<input type="password" name="a_PW"
 							placeholder="事前に配布したPWを入力してください"
+							disabled
 							style="background-color: #DEEFF9">
 						</th>
 					</tr>
 				</table>
 				<p id="error_msg">
+				<p id="error_msg1">
+				<p id="error_msg2">
 				</p>
 
-
-				<input type="submit" name="REGIST" value="登録" class="userwrap"
-					src="/QAManagement/login.jsp/">
+				<input type ="submit" id ="button"  class ="userwrap" name ="regist_button" value ="会員登録" onclick="return checkUser()">
 			</div>
 		</form>
 
@@ -115,48 +112,88 @@
 		// 登録ボタン押されたとき項目の記入がないと入力するよう警告
 
 		    // エラーメッセージ「内容をすべて入力してください」
-			'use strict';
-			document.getElementById('form').onsubmit = function(event) {
-				const people = document.getElementById('form').people.value;
+	//		document.getElementById('form').onsubmit=function(event) {
+			function checkUser(){
+				const position = document.getElementById('form').position.value;
 				const user_class = document.getElementById('form').user_class.value;
 				const name = document.getElementById('form').name.value;
-				const ID = document.getElementById('form').ID.value;
-				const PW = document.getElementById('form').PW.value;
+				const user_id = document.getElementById('form').user_id.value;
+				const user_pw = document.getElementById('form').user_pw.value;
 				const conPW = document.getElementById('form').conPW.value;
+				const a_PW = document.getElementById('form').a_PW.value;
+				let count = 0;
 
-				if (people === "" || user_class === "" || name === "" || ID === "" || PW === "" || conPW === "") {
+				if (position === "" || user_class === "" || name === "" || user_id === "" || user_pw === "" || conPW === ""){
 					event.preventDefault();
-					document.getElementById('error_msg').textContent = '内容をすべて入力してください';
+					document.getElementById('error_msg').textContent = `内容をすべて入力してください`;
+					count += 1;
 				}
-			};
+				if(user_pw.trim() !== ""){
+					if (user_pw !== conPW) {
+						event.preventDefault();
+						document.getElementById('error_msg1').textContent = `PWと確認用PWが一致しません`;
+						count += 1;
+					}
+				}
+				if(position === '講師・事務局'){
+					if (a_PW !== 'password') {
+						event.preventDefault();
+						document.getElementById('error_msg2').textContent = `回答者用パスワードが一致しません`;
+						a_PW.disabled = false;
+						count += 1;
+					}
+				}
+				if(count===0){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			document.getElementById('form').onchange = function(event){
+				const position = document.getElementById('form').position.value;
+				const a_PW = document.getElementById('form').a_PW;
+				if(position === '講師・事務局'){
+					a_PW.disabled = false;
+				}else{
+					a_PW.disabled = true;
+				}
+			}
 
-
+			/*
 			// エラーメッセージ「PWと確認用PWが一致しません」
-			'use strict';
 			document.getElementById('form').onsubmit = function(event) {
-				const PW = document.getElementById('form').PW.value;
+				const user_pw = document.getElementById('form').user_pw.value;
 				const conPW = document.getElementById('form').conPW.value;
 
-				if (PW !== conPW) {
+				if (user_pw !== conPW) {
 					event.preventDefault();
-					document.getElementById('error_msg').textContent = 'PWと確認用PWが一致しません';
+					document.getElementById('error_msg').textContent = `PWと確認用PWが一致しません`;
 				}
-			};
+			}
 
-
-			// エラーメッセージ「回答者用PWが一致しません」
-			'use strict';
+			//回答者用パスワードがあっているか確認
 			document.getElementById('form').onsubmit = function(event) {
-				const PW = document.getElementById('form').PW.value;
-				const conPW = document.getElementById('form').conPW.value;
-
-				if (PW !== conPW) {
-					event.preventDefault();
-					document.getElementById('error_msg').textContent = '回答者用PWが一致しません';
+				const a_PW = document.getElementById('form').a_PW.value;
+				const position = document.getElementById('form').position.value;
+				if(position === '講師・事務局'){
+					if (a_PW !== 'password') {
+						event.preventDefault();
+						document.getElementById('error_msg').textContent = `回答者用パスワードが一致しません`;
+					}
 				}
-			};
+			}
+
+			document.getElementById('form').onchange = function(event){
+				const position = document.getElementById('form').position.value;
+				const a_PW = document.getElementById('form').a_PW;
+				if(position === '講師・事務局'){
+					a_PW.disabled = false;
+				}else{
+					a_PW.disabled = true;
+				}
+			}
+			*/
+
 		</script>
-
-
-		<jsp:include page="footer.jsp" />
-	</body></html>
+</body>
+</html>

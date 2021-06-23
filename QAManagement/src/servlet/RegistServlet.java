@@ -29,7 +29,7 @@ public class RegistServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// もしもログインしていなかったらログインサーブレットにリダイレクトする
 				HttpSession session = request.getSession();
-				if (session.getAttribute("user") == null) {
+				if (session.getAttribute("user") == null && !(request.getParameter("regist_button").equals("会員登録"))) {
 					response.sendRedirect("/QAManagement/LoginServlet");
 					return;
 				}
@@ -40,7 +40,12 @@ public class RegistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
+			HttpSession session = request.getSession();
+				if (session.getAttribute("user") == null && !(request.getParameter("regist_button").equals("会員登録"))) {
+					response.sendRedirect("/QAManagement/LoginServlet");
+					return;
+				}
 
 				request.setCharacterEncoding("UTF-8");
 				User user = (User)session.getAttribute("user");
@@ -87,10 +92,7 @@ public class RegistServlet extends HttpServlet {
 					//質問登録
 				}
 				//ログインしていなかったらログインページへ
-				if (session.getAttribute("user") == null) {
-					response.sendRedirect("/QAManagement/LoginServlet");
-					return;
-				}else if(request.getParameter("quest_button").equals("質問登録")) {
+				else if(request.getParameter("quest_button").equals("質問登録")) {
 					int first = Integer.parseInt(request.getParameter("first"));
 					if(qDAO.insert(people, category, first, q_image, q_content, user_id)) {
 						request.setAttribute("message", "質問登録が完了しました");

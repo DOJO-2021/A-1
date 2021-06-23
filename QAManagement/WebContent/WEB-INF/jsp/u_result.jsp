@@ -18,8 +18,8 @@ p {
 }
 </style>
 </head>
-<jsp:include page="header.jsp"/>
 <body>
+<a href = "/QAManagement/LoginServlet">ログイン画面へ</a>
 	<div class="u_result">
 		<p>${requestScope.u_registErr}</p>
 	</div>
