@@ -73,10 +73,10 @@ input[name=rp_reply]{
 <h2>回答ページ</h2>
 <table class="qatable">
 	<tr>
-		<td class ="mt">クラス：<label><c:out value="${answerList[0].user_class}" /></label>相手：<label>相手<c:out value="${answerList[0].people}" /></label>名前：<label>名前<c:out value="${answerList[0].name}" /></label></td>
+		<td class ="mt">クラス：<label><c:out value="${answerList[0].user_class}" /></label>相手：<label><c:out value="${answerList[0].people}" /></label>名前：<label><c:out value="${answerList[0].name}" /></label></td>
 	</tr>
 	<tr>
-		<td class ="mt">優先度：<label><c:out value="${answerList[0].first}" /></label>カテゴリー：<label><c:out value="${answerList.[0]category}" /></label></td>
+		<td class ="mt">優先度：<label><c:out value="${answerList[0].first}" /></label>カテゴリー：<label><c:out value="${answerList[0].category}" /></label></td>
 	</tr>
 	<tr>
 		<td class ="mt">質問内容<div class = "qcontent"><p><c:out value="${answerList[0].q_content}" /></p></div></td>

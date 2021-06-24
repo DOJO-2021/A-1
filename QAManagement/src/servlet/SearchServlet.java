@@ -75,7 +75,7 @@ public class SearchServlet extends HttpServlet {
 		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
 		System.out.println(request.getParameter("login")+"←ろぐいん");
 		System.out.println(request.getParameter("FLG"+"フラグ"));
-		if(request.getParameter("login")==null && request.getParameter("FLG")==null) {
+		if(request.getParameter("login")==null && request.getParameter("FLG")==null){
 			List<AllBeans> questionNowList = qDAO.defaultNow();
 			// 対応中検索結果をリクエストスコープに格納
 			request.setAttribute("questionNowList",questionNowList);
@@ -97,7 +97,7 @@ public class SearchServlet extends HttpServlet {
 			// 閲覧ページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
 			dispatcher.forward(request, response);
-		}else if (request.getParameter("login").equals("ログイン") || request.getParameter("FLG").equals("閲覧ページへ")) {
+		}else if (request.getParameter("login")!=null || request.getParameter("FLG").equals("閲覧ページへ")) {
 
 
 			List<AllBeans> questionNowList = qDAO.defaultNow();
@@ -123,7 +123,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("search").equals("左検索")) {
+		} else if(request.getParameter("search")!=null) {
 			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 
@@ -151,7 +151,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("id_search").equals("個人検索")) {
+		} else if(request.getParameter("id_search")!=null) {
 			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 
@@ -179,7 +179,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("search_name").equals("名前検索")) {
+		} else if(request.getParameter("search_name")!=null) {
 			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 			// 個人絞り込み 名前検索
@@ -198,7 +198,7 @@ public class SearchServlet extends HttpServlet {
 			// ヘッダーからマイページクリック
 			// 受講者だったとき
 
-			if(user.getPosition().equals("受講者") ){
+			if(user.getPosition().equals("受講生") ){
 				 q_id = Integer.parseInt(request.getParameter("q_id"));
 
 
@@ -254,10 +254,9 @@ public class SearchServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			}
-		}else if (request.getParameter("answer").equals("回答ボタン")) {
+		}else if (request.getParameter("answer")!=null) {
 			 q_id = Integer.parseInt(request.getParameter("q_id"));
-
-
+			 System.out.println(q_id);
 			List<AllBeans> answerList = aDAO.answer_left(q_id);
 			// 対応中検索結果をリクエストスコープに格納
 			request.setAttribute("answerList",answerList);

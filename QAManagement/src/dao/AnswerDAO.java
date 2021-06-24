@@ -25,7 +25,7 @@ public class AnswerDAO {
 
 			// SELECT文を準備する		ユーザーが入れてくる情報を?にしておく
 			// 絞り込み検索用SQL
-			String sql = "select * from answer left outer join question on answer.q_id = question.q_id left outer join user on answer.user_id = user.user_id where q_id = ?;";
+			String sql = "select * from answer left outer join question on answer.q_id = question.q_id left outer join user on answer.user_id = user.user_id where answer.q_id = ?;";
 			PreparedStatement pStmt = conn.prepareStatement(sql);		// PreparedStatementが無害化して↓
 			pStmt.setInt(1, q_id);		// 1番目の?マークにユーザーが入れたidを入れる paramはUser型
 
