@@ -53,9 +53,9 @@ public class UpdateServlet extends HttpServlet {
 		User user = (User)session.getAttribute("user");
 
 		String user_id = request.getParameter("user_id");
-		String user_pw = request.getParameter("user_pw");
-		String name = request.getParameter("name");
-		String user_class = request.getParameter("user_class");
+		String user_pw = request.getParameter("new_pw");
+		String name = request.getParameter("new_name");
+		String user_class = request.getParameter("new_class");
 
 
 		UserDAO uDAO = new UserDAO();
@@ -65,19 +65,23 @@ public class UpdateServlet extends HttpServlet {
 			// 会員情報変更結果をリクエストスコープに格納
 			request.setAttribute("message", "会員情報を変更しました。");
 
-		// resultページにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_result.jsp");
-		dispatcher.forward(request, response);
+			// resultページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_result.jsp");
+			dispatcher.forward(request, response);
 
 
-	} else {
-		// 会員情報変更、失敗結果をリクエストスコープに格納
-		request.setAttribute("message", "会員情報の変更に失敗しました。");
+		} else {
+			// 会員情報変更、失敗結果をリクエストスコープに格納
+			request.setAttribute("message", "会員情報の変更に失敗しました。");
 
-		// resultページにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
-		dispatcher.forward(request, response);
+			System.out.println(user_id);
+			System.out.println(user_pw);
+			System.out.println(name);
+			System.out.println(user_class);
+			// resultページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
+			dispatcher.forward(request, response);
 
-	}
+		}
 	}
 }

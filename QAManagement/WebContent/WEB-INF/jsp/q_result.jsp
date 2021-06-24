@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,24 +72,24 @@ table{
   </header>
 
   <div class="wrapper">
-    <p id="pp">{message}</p>
+    <p id="pp">${message}</p>
     <table>
       <tr>
-        <td width="100" height="40">クラス</td>
+        <td width="100" height="40">クラス：</td>
         <td width="80"><c:out value="${sessionScope.user.user_class}" />
-        <td width="80">質問相手</td>
+        <td width="80">質問相手:</td>
         <td width="80">
-         ${requestScope.position}
+         ${requestScope.people}
         </td>
       </tr>
       <tr>
-        <td width="100" height="40">優先度</td>
+        <td width="80" height="40">優先度：</td>
         <td>
-          <c:out value="${requestScope.first}" />${requestScope.first}
+          <c:out value="${requestScope.first}" />
         </td>
-        <td width="80">カテゴリー</td>
+        <td width="130">質問カテゴリー：</td>
         <td width="80">
-           <c:out value="${requestScope.category}" />${requestScope.category}
+           <c:out value="${requestScope.category}" />
         </td>
       </tr>
       <tr>
@@ -96,9 +97,9 @@ table{
         </td>
       </tr>
       <tr>
-        <td width="100" height="40">内容</td>
+        <td width="100" height="40">質問内容：</td>
         <td colspan="3">
-           <c:out value="${requestScope.q_content}" />${requestScope.q_content}
+           <c:out value="${requestScope.q_content}" />
         </td>
 
       </tr>

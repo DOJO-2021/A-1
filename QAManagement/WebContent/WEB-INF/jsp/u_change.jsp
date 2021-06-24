@@ -94,11 +94,13 @@ table {
 					<th>変更後パスワード確認</th>
 					<td><input type="password" name="con_pw"></td>
 				</tr>
+				<tr>
 				<th colspan="2">
 					<input type="submit" value="変更" name="change_button" class="btn-flat-border">
 				</th>
 				</tr>
 			</table>
+<input type="hidden" name = "user_id" value = "${sessionScope.user.user_id}" />
 		</form>
 		<p id="pw_error"></p>
 		<p id="form_error"></p>
