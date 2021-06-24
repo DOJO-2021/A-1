@@ -91,6 +91,9 @@ main{
   background: #EBCAA3;
   color: #644111;
 }
+.sub{
+	text-align:center;
+}
 
 </style>
 </head>
@@ -98,7 +101,7 @@ main{
 	<header>
 		<div class="header">
 			<!-- ロゴ -->
-			<img src="logo_ske.png" alt="QA Management" class="image">
+			<img src="image/logo_ske.png" alt="QA Management" class="image">
 			<!-- リスト -->
 			<section id=head>
 				<ul class="nav">
@@ -172,23 +175,10 @@ main{
 						style="width : 240px; background-color: #DEEFF9; "></td>
 
 				</tr>
-
-					<tr>
-						<th>確認用PW<input type="password" name="conPW"
-							placeholder="もう一度PWを入力してください" style="background-color: #DEEFF9">
-						</th>
-					</tr>
-
-					<tr>
-						<th>回答者用PW<input type="password" name="a_PW"
-							placeholder="事前に配布したPWを入力してください"
-							disabled
-							style="background-color: #DEEFF9">
-						</th>
-					</tr>
 				</table>
-
+				<div class="sub">
 				<input type ="submit" id ="button" class="btn-flat-border" name ="regist_button" value ="会員登録" onclick="return checkUser()" >
+				</div>
 				<p id="error_msg">
 				<p id="error_msg1">
 				<p id="error_msg2">
