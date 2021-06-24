@@ -1,27 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.balloon {
-  position   : relative;                /* 指定した分だけ相対的に移動 */
-  padding: 10px;                        /* テキストの前後の余白 */
-  background-color: rgba(0, 0, 0, 0.20);       /* 背景色（透明度） */
-  width:500px;
-  top: 50px;                        /* 吹き出し全体の幅 */
-  left : 50%;                           /* 表示位置 */
-  transform: translate(-150%);           /* 表示位置の調整 */
+
+.wrapper {
+  width: 500px;
+  height: 50px;
+  background: #fffacd;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-style: solid;
+  border-color: #e2a654;
 }
 
+.btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #f8ead1;
+  border: solid 2px #e2a654;
+  border-radius: 3px;
+  transition: .4s;
+  background: #e2a654;
+  margin-top: 30px;
+  position: relative;
+  left: 1200px;
+  top: 100px;
+}
+
+.btn-flat-border:hover {
+  background: #ebcaa3;
+  color: #644111;
+}
 </style>
 </head>
+<jsp:include page="header.jsp"/>
 <body>
 <form method="POST" action="/QAManagement/SearchServlet" ID="filter">
   <c:forEach var="e" items="${filterList}">
-      <table align="center" class="balloon">
+      <table class=wrapper>
         <tr>
           <td>氏名:${e.name}
           </td>
@@ -35,6 +55,8 @@
       </table>
     </c:forEach>
     </form>
-    <input type="submit" class="" name="id_search" value="個人検索" form = "filter"></input>
+
+    <input type="submit" class="btn-flat-border" name="id_search" value="個人検索" form = "filter"></input>
 </body>
+<jsp:include page="footer.jsp"/>
 </html>

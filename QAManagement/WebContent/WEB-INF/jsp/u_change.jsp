@@ -1,30 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>QAManagement</title>
 <style>
-body {
-	background-color: #e6e6fa;
+
+h2{
+	text-align: center;
 }
 
+body {
+	color: #583822;
+}
 .userwrap {
 	margin: 0 auto;
 	margin-top: 50px;
 	max-width: 500px;
-	background-color: #ffff9e;
+	background-color: #fffacd;
 	padding-bottom: 20px;
+	border-style: solid;
+  border-color: #f5deb3;
+
 }
 
-h2 {
-	padding-left: 50px;
-	padding-top: 50px;
+.btn-flat-border {
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #f8ead1;
+  border: solid 2px #e2a654;
+  border-radius: 3px;
+  transition: .4s;
+  background: #e2a654;
+  margin-top: 30px;
 }
+
+.btn-flat-border:hover {
+  background: #ebcaa3;
+  color: #644111;
+}
+
+
 
 table {
-	margin: auto;
+	margin-top: 30px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #pw_error {
@@ -40,8 +64,8 @@ table {
 </head>
 <jsp:include page="header.jsp"/>
 <body>
+	<h2>会員情報変更</h2>
 	<div class="userwrap">
-		<h2>会員情報変更ページ</h2>
 		<form method="POST" action="/QAManagement/UpdateServlet" id="form">
 			<table>
 				<tr>
@@ -70,8 +94,9 @@ table {
 					<th>変更後パスワード確認</th>
 					<td><input type="password" name="con_pw"></td>
 				</tr>
-				<tr>
-					<td><input type="submit" value="変更" name="change_button"></td>
+				<th colspan="2">
+					<input type="submit" value="変更" name="change_button" class="btn-flat-border">
+				</th>
 				</tr>
 			</table>
 		</form>
