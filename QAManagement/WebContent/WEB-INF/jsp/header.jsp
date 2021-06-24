@@ -16,7 +16,7 @@
 			<li><a href="/QAManagement/SearchServlet">閲覧</a>
 
 			<!-- ↓回答者側では隠れる↓ -->
-			<c:if test="${sessionScope.user.position = '受講者'}">
+			<c:if test="${sessionScope.user.position == '受講生'}">
 			<li><a href="/QAManagement/ChangePageServlet?FLG=質問">質問</a></li>
 			</c:if>
 
