@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class URegistServlet
+ * Servlet implementation class ChangePageServlet
  */
-@WebServlet("/URegistServlet")
+@WebServlet("/ChangePageServlet")
 public class ChangePageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class ChangePageServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}else if(request.getParameter("FLG").equals("会員情報変更")) {
 			//会員登録ページにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_regist.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_change.jsp");
 			dispatcher.forward(request, response);
 		}
 	}

@@ -45,12 +45,15 @@ table {
 	width: 800px;
 }
 
+
 .empty {
 margin:2px;
 }
 </style>
 </head>
+<jsp:include page="header.jsp" />
 <body>
+
 	<h1>質問一覧</h1>
 	<div class="qwrap">
 		<div class="qs">
@@ -326,4 +329,5 @@ margin:2px;
 		});
 	</script>
 </body>
+<jsp:include page="footer.jsp" />
 </html>
