@@ -49,6 +49,12 @@ public class RegistServlet extends HttpServlet {
 
 				request.setCharacterEncoding("UTF-8");
 				User user = (User)session.getAttribute("user");
+/*				String user_id =null;
+			if(request.getParameter(user_id)==null) {
+					user_id =(String)session.getAttribute(user.getUser_id());
+				}else {
+					user_id =request.getParameter(user_id);
+				}*/
 
 				String user_id = request.getParameter("user_id");
 				String name = request.getParameter("name");
@@ -66,7 +72,7 @@ public class RegistServlet extends HttpServlet {
 
 				String situation = request.getParameter("situation");
 
-
+				String path = "";
 
 				QuestionDAO qDAO = new QuestionDAO();
 				UserDAO uDAO = new UserDAO();
@@ -78,21 +84,16 @@ public class RegistServlet extends HttpServlet {
 						request.setAttribute("u_registErr", "会員登録が完了しました");
 
 						//会員登録変更結果ページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_result.jsp");
-						dispatcher.forward(request, response);
-
+						path = "/WEB-INF/jsp/u_result.jsp";
 
 					} else {
 						request.setAttribute("u_registErr", "会員登録ができませんでした");
 
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/u_result.jsp");
-						dispatcher.forward(request, response);
+						path = "/WEB-INF/jsp/u_result.jsp";
 					}
 
 					//質問登録
-				}
-				//ログインしていなかったらログインページへ
-				else if(request.getParameter("quest_button") != null) {
+				}else if(request.getParameter("quest_button") != null) {
 					int first = Integer.parseInt(request.getParameter("first"));
 					if(qDAO.insert(people, category, first, q_image, q_content, user_id)) {
 						request.setAttribute("message", "質問登録が完了しました");
@@ -105,8 +106,7 @@ public class RegistServlet extends HttpServlet {
 
 
 						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/ｑ_result.jsp");
-						dispatcher.forward(request, response);
+						path = "/WEB-INF/jsp/q_result.jsp";
 					} else {
 						request.setAttribute("message", "質問登録が失敗しました");
 						System.out.println(people);
@@ -116,46 +116,32 @@ public class RegistServlet extends HttpServlet {
 						System.out.println(user_id);
 
 						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
-						dispatcher.forward(request, response);
+						path ="/WEB-INF/jsp/message.jsp";
 
 					}
 					//回答登録
 				} else if(request.getParameter("rp_button") != null) {
 					int q_id = Integer.parseInt(request.getParameter("q_id"));
 					if(aDAO.insert(a_content, a_image, q_id, user_id)) {
-						request.setAttribute("message", "回答登録が完了しました");
 						request.setAttribute("a_content", a_content);
 						request.setAttribute("a_image", a_image);
+						if(qDAO.update(situation, q_id)) {
+							request.setAttribute("situation", situation);
+							//a_resultページにフォワード
+							path = "/WEB-INF/jsp/a_result.jsp";
 
+						} else {
+							request.setAttribute("message", "対応中・対応完了変更が失敗しました");
+							//resultページにフォワード
+							path = "/WEB-INF/jsp/message.jsp";
+						}
 					} else {
 						request.setAttribute("message", "回答登録が失敗しました");
 						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
-						dispatcher.forward(request, response);
+						path = "/WEB-INF/jsp/message.jsp";
 					}
-						//対応中・対応完了変更
-					if(qDAO.update(situation, q_id)) {
-						request.setAttribute("situation", situation);
-
-					} else {
-						request.setAttribute("message", "対応中・対応完了変更が失敗しました");
-						//resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
-						dispatcher.forward(request, response);
-					}
-
-
-						//a_resultページにフォワード
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/a_result.jsp");
-						dispatcher.forward(request, response);
-
-
-
-
 				}
-
-
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
 	}
-
 }

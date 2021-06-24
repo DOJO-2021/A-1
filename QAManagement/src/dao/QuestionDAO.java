@@ -980,7 +980,7 @@ public class QuestionDAO {
 			Class.forName("org.h2.Driver");
 
 			// データベースに接続する
-			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/data/simpleBC", "sa", "");
+			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/A-1/QAManagement/QADB", "sa", "momoka");
 
 			// SQL文を準備する			NUMBERは同じものはないから↓
 			// setの中にID以外全項目入れる

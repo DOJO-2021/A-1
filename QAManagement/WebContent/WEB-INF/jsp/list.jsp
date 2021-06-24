@@ -107,11 +107,13 @@ margin:2px;
 	<div class="qlist">
 		<p>対応中</p>
 		<c:forEach var="e" items="${questionNowList}">
-			<form method="POST" action="/QAManagement/SearchServlet">
+			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
+						<td><input type="hidden"
+							name="q_id" value="${e.q_id}"></td>
 						<td><strong>${e.user_class}</strong><input type="hidden"
-							name="user_id" value="${e.user_class}"><br></td>
+							name="user_class" value="${e.user_class}"><br></td>
 
 						<td><strong>${e.people}</strong><input type="hidden"
 							name="people" value="${e.people}"><br></td>
@@ -181,11 +183,13 @@ margin:2px;
 	<div class="qlist">
 		<p>未対応</p>
 		<c:forEach var="g" items="${questionYetList}">
-			<form method="POST" action="/QAManagement/SearchServlet">
+			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
+						<td><input type="hidden"
+							name="q_id" value="${g.q_id}"></td>
 						<td><strong>${g.user_class}</strong><input type="hidden"
-							name="user_id" value="${g.user_class}"><br></td>
+							name="user_class" value="${g.user_class}"><br></td>
 
 						<td><strong>${g.people}</strong><input type="hidden"
 							name="people" value="${g.people}"><br></td>
@@ -253,12 +257,13 @@ margin:2px;
 		<p>対応完了</p>
 		<c:forEach var="i" items="${questionEndList}">
 
-			<form method="POST" action="/QAManagement/SearchServlet">
+			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
-						<td>${i.q_id}<br></td>
+						<td><input type="hidden"
+							name="q_id" value="${i.q_id}"></td>
 						<td><strong>${i.user_class}</strong><input type="hidden"
-							name="user_id" value="${i.user_class}"><br></td>
+							name="user_class" value="${i.user_class}"><br></td>
 
 						<td><strong>${i.people}</strong><input type="hidden"
 							name="people" value="${i.people}"><br></td>
@@ -283,8 +288,8 @@ margin:2px;
 					<tr>
 						<td><strong>${i.q_content}</strong><input type="hidden"
 							name="q_content" value="${i.q_content}"><br></td>
-						<td class="delete"><input type="submit"
-							name="q_delete_button" value="質問削除"></td>
+						<td class="delete">
+						<input type= "submit" name = "q_delete_button" value = "質問削除"></td>
 					</tr>
 					<c:if test="${g.q_image != null }">
 						<tr>

@@ -83,7 +83,7 @@ public class DeleteServlet extends HttpServlet {
 
 			// 質問削除
 			// 質問者マイページ
-		} else if (request.getParameter("delete_button").equals("質問削除")) {
+		} else if (request.getParameter("q_delete_button").equals("質問削除")) {
 
 				if(qDAO.delete(q_id))  {
 					// 削除の結果をリクエストスコープに格納

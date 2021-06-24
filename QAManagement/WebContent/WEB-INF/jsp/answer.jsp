@@ -91,19 +91,21 @@ input[name=rp_reply]{
 <form id="a_form" method="POST" action="/QAManagement/RegistServlet">
 <table class ="answerform">
 	<tr>
-		<td>返信内容<br><textarea name="rp_reply" rows="10" cols="100"></textarea></td>
+		<td>返信内容<br><textarea name="a_content" rows="10" cols="100"></textarea></td>
 	</tr>
 	<tr>
 		<td>
 		<p>
 			<label class ="situation"><input type="radio" name="situation" value="対応中"> 対応中</label>
-			<label class ="situation"><input type="radio" name="situation" value="対応完了"> 対応完了</label>
+			<label class ="situation"><input type="radio" name="situation" value="対応済み"> 対応済み</label>
       <button type="button" onclick="radioDeselection()">リセット</button>
 		</p>
 		</td>
 	</tr>
 	<tr>
-		<td><input type="submit" name="rp_button" value="回答登録" class="btn-flat-border"></td>
+		<td><input type="hidden"name="user_id" value="${sessionScope.user.user_id}">
+		<input type="hidden" name="q_id" value="${answerList[0].q_id}">
+		<input type="submit" name="rp_button" value="回答登録" class="btn-flat-border"></td>
 	</tr>
 	<tr>
 		<td><p id="form_error"></p></td>

@@ -44,7 +44,7 @@ public class AnswerDAO {
 				allBeans.setQ_content(rs.getString("q_content"));
 				allBeans.setA_content(rs.getString("a_content"));
 				allBeans.setPosition(rs.getString("position"));
-
+				allBeans.setQ_id(rs.getInt("q_id"));
 				answerList.add(allBeans);		// ArrayListに入れなおす（みんな知ってるから）
 			}
 
@@ -86,21 +86,18 @@ public class AnswerDAO {
 			conn = DriverManager.getConnection("jdbc:h2:file:C:/pleiades/workspace/A-1/QAManagement/QADB", "sa", "momoka");
 
 			// SQL文を準備する
-
-			String sql = "insert into User values (null, ?, ?, ?, ?)";
+			String sql = "insert into Answer values (null, ?, ?, ?, ?,)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 
 			// SQL文を完成させる
 
-			pStmt.setString(1, a_content);		//1つ目の?(=NAME)に入力値をいれる
+			pStmt.setString(1, a_content);	//1つ目の?(=NAME)に入力値をいれる
 
 			pStmt.setString(2, a_image);
 
 			pStmt.setInt(3, q_id);
 
 			pStmt.setString(4, user_id);
-
-
 
 			// SQL文を実行する
 			// ここは変えなくていい
