@@ -9,15 +9,20 @@
 .u_result {
 	width: 500px;
 	height: 300px;
-	background-color: #ffffe0;
+	background: #FFFACD;
+	border-style: solid;
+	border-color: #F5DEB3;
 	margin: auto;
 }
 
 p {
 	text-align: center;
+	padding-top: 120px;
 }
 </style>
 </head>
+<!-- headerインクルード -->
+<jsp:include page="header.jsp"/>
 <body>
 <a href = "/QAManagement/LoginServlet">ログイン画面へ</a>
 	<div class="u_result">

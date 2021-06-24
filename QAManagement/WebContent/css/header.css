@@ -5,9 +5,9 @@
 
 .header {
 	padding: 15px;
-	border: 20px solid #fffacd;		/* 外枠 */
+	border-top: 20px solid #fffacd;		/* 外枠 */
 	background: #ffffe0;
-	font-family: sans-serif;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 #head ul {

@@ -5,7 +5,7 @@
 <div class="header">
 	<!-- ロゴ -->
 	<a href="/QAManagement/SearchServlet?FLG=閲覧ページへ"> <img
-		src="image/logo_1_small_ske.png" alt="QA Management" class="image"></a>
+		src="image/logo_ske.png" alt="QA Management" class="image"></a>
 
 	<!-- リスト -->
 	<section id=head>
@@ -16,7 +16,7 @@
 			<li><a href="/QAManagement/SearchServlet">閲覧</a>
 
 			<!-- ↓回答者側では隠れる↓ -->
-			<c:if test="${sessionScope.user.position != '受講者'}">
+			<c:if test="${sessionScope.user.position = '受講者'}">
 			<li><a href="/QAManagement/ChangePageServlet?FLG=質問">質問</a></li>
 			</c:if>
 
