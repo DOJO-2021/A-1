@@ -15,7 +15,7 @@
 	margin: auto;
 }
 
-p {
+.massage {
 	text-align: center;
 	padding-top: 120px;
 }
@@ -26,7 +26,8 @@ p {
 <body>
 <a href = "/QAManagement/LoginServlet">ログイン画面へ</a>
 	<div class="u_result">
-		<p>${requestScope.u_registErr}</p>
+		<p class="massage">${requestScope.u_registErr}</p>
+		<p>${requestScope.message}</p>
 	</div>
 </body>
 <!-- footerインクルード -->
