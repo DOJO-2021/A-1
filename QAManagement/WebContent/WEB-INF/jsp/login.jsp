@@ -4,19 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QAManagement</title>
 <link rel="stylesheet" href="/QAManagement/css/style.css">
 
 <style>
-/*
-html{
-	background-color: #FFFFE0;
-}
+@import url(https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c);
 /* テーブル */
 table{
 	margin: 50px auto auto auto;
 }
-
 .userwrap {
    /* border:8px solid #ffa500;" */
 	margin: 50px auto 0 auto;
@@ -39,14 +35,12 @@ table{
     font-size: 20px;
 
 }
-
-
 .header {
 	padding: 15px;
 	border-top: 20px solid #fffacd;		/* 外枠 */
 	/* border-bottom: 20px solid #fffacd;		/* 外枠 */
 	background: #ffffe0;
-	font-family: sans-serif;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 #head ul {
 	list-style: none;
@@ -65,22 +59,18 @@ table{
 .nav a:link {
 	color: #8D4F42;
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 25px;
 }
 .nav a:hover {
 	color: #D2691E;
 	text-decoration: none;
-	font-size: 17px;
+	font-size: 25px;
 }
 .image {
 	width: 125px;
 	float: left;
 	padding-left: 20px;
 }
-
-
-
-
 .btn-flat-border {
   display: inline-block;
   padding: 0.3em 1em;
@@ -95,9 +85,6 @@ table{
   background: #EBCAA3;
   color: #644111;
 }
-
-
-
 </style>
 
 </head>
@@ -105,7 +92,7 @@ table{
 <header>
 <div class="header">
 	<!-- ロゴ -->
- <img src="logo_ske.png" alt="QA Management" class="image">
+ <img src="image/logo_ske.png" alt="QA Management" class="image">
 	<!-- リスト -->
 	<section id=head>
 		<ul class="nav">
@@ -147,10 +134,7 @@ table{
 				</tr>
 			</table>
 		</form>
-
 	</main>
-
-
 
 	<script>
 		'use strict';
@@ -167,7 +151,6 @@ table{
 	</script>
 
 </body>
-        <!-- footerインクルード -->
+		<!-- footerインクルード -->
 		<jsp:include page="footer.jsp" />
-
 </html>
