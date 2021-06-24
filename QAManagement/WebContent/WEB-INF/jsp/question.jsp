@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -63,7 +65,7 @@ table{
           </td>
           <td width="80">質問相手</td>
           <td width="80">
-            <select name="position" >
+            <select name="people" >
               <option value="">相手</option>
               <option value="講師">講師</option>
               <option value="事務局">事務局</option>
@@ -113,8 +115,9 @@ table{
               <p id=error></p>
           </th>
         </tr>
-      </table>
 
+      </table>
+<input type="hidden" name = "user_id" value = "${sessionScope.user.user_id}" />
     </form>
   </div>
 
@@ -130,10 +133,10 @@ function previewImage(obj) {
 
 //質問登録ボタン押されたとき必須項目の記入がないと必須項目を入力するよう警告
 function checkData(){
-  const position = document.getElementById('form').position.value;
+  const people = document.getElementById('form').people.value;
   const first = document.getElementById('form').first.value;
   const category = document.getElementById('form').category.value;//←NAMEは固有値
-  if(position === "" || first === "" || category === "" ){
+  if(people === "" || first === "" || category === "" ){
   	event.preventDefault();
  	  document.getElementById('error').textContent = '※内容を全て入力してください';
 
@@ -145,6 +148,7 @@ function checkData(){
 
 
 </script>
+
 </body>
 <jsp:include page="footer.jsp"/>
 </html>
