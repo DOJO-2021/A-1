@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,9 +59,9 @@ border-collapse:collapse;
 				<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 					<table class = "p_search">
 						<tr>
-							<td><label><input type="text" name="content"
+							<td><label><input type="text" name="name"
 									placeholder="ああああああ"></label><br></td>
-							<td><input type="submit" name="search" value="検索">
+							<td><input type="submit" name="search_name" value="検索">
 							</td>
 						</tr>
 					</table>
@@ -71,7 +72,7 @@ border-collapse:collapse;
 	</div>
 		<div class="qlist">
 			<p>対応中</p>
-			<c:forEach var="e" items="${q_idNowList}">
+			<c:forEach var="e" items="${q_answerNowList}" varStatus="status">
 				<form method="POST" action="/QAManagement/SearchServlet">
 					<table class="line">
 						<tr>
@@ -90,14 +91,14 @@ border-collapse:collapse;
 
 							<td><strong>${e.first}</strong><input type="hidden"
 								name="first" value="${e.first}"><br></td>
-							<td><input type="checkbox" name="syousai">詳細</td>
+							<td><input type="checkbox" name="syousai" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 
 							<td><input type="submit" name="answer" value="回答"></td>
 						</tr>
 					</table>
 				</form>
 
-				<div class="hidden">
+				<div class="del" id="delId${status.index}">
 					<table class="line">
 						<tr>
 							<td><strong>${e.q_content}</strong><input type="hidden"
@@ -111,12 +112,12 @@ border-collapse:collapse;
 						</tr>
 						<c:if test="${e.q_image != null }">
 							<tr>
-								<td><strong>{e.q_image}</strong><input type="hidden"
+								<td><strong>${e.q_image}</strong><input type="hidden"
 									name="" value=""><br></td>
 							</tr>
 						</c:if>
 					</table>
-					<c:forEach var="f" items="${answerList}">
+					<c:forEach var="f" items="${answerList}" varStatus="status">
 
 						<form>
 							<c:if test="${e.q_id == f.q_id }">
@@ -150,7 +151,7 @@ border-collapse:collapse;
 
 		<div class="qlist">
 			<p>未対応</p>
-			<c:forEach var="g" items="${q_idYetList}">
+			<c:forEach var="g" items="${q_answerYetList}" varStatus="status">
 				<form method="POST" action="/QAManagement/SearchServlet">
 					<table class="line">
 						<tr>
@@ -169,14 +170,14 @@ border-collapse:collapse;
 
 							<td><strong>${g.first}</strong><input type="hidden"
 								name="first" value="${g.first}"><br></td>
-							<td><input type="checkbox" name="syousai">詳細</td>
+							<td><input type="checkbox" name="syousai" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 
 							<td><input type="submit" name="answer" value="回答"></td>
 						</tr>
 					</table>
 				</form>
 
-				<div class="hidden">
+				<div class="del" id="delId${status.index}">
 					<table class="line">
 						<tr>
 							<td><strong>${g.q_content}</strong><input type="hidden"
@@ -195,7 +196,7 @@ border-collapse:collapse;
 							</tr>
 						</c:if>
 					</table>
-					<c:forEach var="f" items="${answerList}">
+					<c:forEach var="f" items="${answerList}" varStatus="status">
 
 						<form>
 							<c:if test="${g.q_id == f.q_id }">
@@ -226,7 +227,7 @@ border-collapse:collapse;
 
 		<div class="qlist">
 			<p>対応完了</p>
-			<c:forEach var="i" items="${q_idEndList}">
+			<c:forEach var="i" items="${q_answerEndList}" varStatus="status">
 
 				<form method="POST" action="/QAManagement/SearchServlet">
 					<table class="line">
@@ -246,7 +247,7 @@ border-collapse:collapse;
 
 							<td><strong>${i.first}</strong><input type="hidden"
 								name="first" value="${i.first}"><br></td>
-							<td><input type="checkbox" name="syousai">詳細</td>
+							<td><input type="checkbox" name="syousai" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 
 							<td><input type="submit" name="answer" value="回答"></td>
 						</tr>
@@ -254,7 +255,7 @@ border-collapse:collapse;
 				</form>
 
 
-				<div class="hidden">
+				<div class="del" id="delId${status.index}">
 					<table class="line">
 						<tr>
 							<td><strong>${i.q_content}</strong><input type="hidden"
@@ -273,7 +274,7 @@ border-collapse:collapse;
 							</tr>
 						</c:if>
 					</table>
-					<c:forEach var="f" items="${answerList}">
+					<c:forEach var="f" items="${answerList}" varStatus="status">
 
 						<form>
 							<c:if test="${i.q_id == f.q_id }">
@@ -302,11 +303,37 @@ border-collapse:collapse;
 			</c:forEach>
 		</div>
 	<script>
-$(document).ready(function() {
-	$('.more').on('click', function() {
-		$(this).next().toggleClass('hidden');
-	});
-});
+	function disp(indexNo){
+		//ここは隠している項目を表示する部分-------------------
+		//チェックボックスの状態を取得
+		var ch =document.getElementById('checkId'+indexNo);
+		//隠している部分の情報を取得
+		var hide =document.getElementById('delId'+indexNo);
+
+		//もし、チェックボックスにチェックがついたら
+		if(ch.checked){
+			//隠している部分のクラス適用（隠す）を無くす
+			hide.setAttribute('class','');
+		}else{
+			//隠している部分のクラス適用（隠す）をつける
+			hide.setAttribute('class','del');
+		}
+
+
+		//ここからは、非活性のボタンを活性化する部分-------------------
+		//チェックボックスの状態を取得
+		var check =document.getElementById('checkId'+indexNo);
+		//ボタンの情報を取得
+		var button = document.getElementById('buttonId'+indexNo);
+		//チェックを付けたら
+		if(check.checked){
+			//ボタンを活性化
+			button.disabled = false;
+		}else{
+			//ボタンを非活性
+			button.disabled = true;
+		}
+	}
 </script>
 </body>
 <jsp:include page="footer.jsp" />

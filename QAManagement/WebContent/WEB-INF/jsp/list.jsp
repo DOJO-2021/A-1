@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +49,11 @@ table {
 .empty {
 	margin: 2px;
 }
+
+	.del{
+		display:none
+	}
+
 </style>
 </head>
 <jsp:include page="header.jsp" />
@@ -105,7 +111,7 @@ table {
 
 	<div class="qlist">
 		<p>対応中</p>
-		<c:forEach var="e" items="${questionNowList}">
+		<c:forEach var="e" items="${questionNowList}" varStatus="status">
 			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
@@ -124,26 +130,21 @@ table {
 
 						<td><strong>${e.first}</strong><input type="hidden"
 							name="first" value="${e.first}"><br></td>
-						<td><input type="checkbox" name="syousai">詳細</td>
+						<td><input type="checkbox" name="syousai" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 
 						<td><input type="submit" name="answer" value="回答"></td>
 					</tr>
 				</table>
 			</form>
 
-			<div class="hidden">
+			<div class="del" id="delId${status.index}">
 				<table class="line">
 					<tr>
 						<td><strong>${e.q_content}</strong><input type="hidden"
 							name="q_content" value="${e.q_content}"><br></td>
 					</tr>
-					<c:if test="${e.q_image != null }">
-						<tr>
-								value=""><br></td>
-						</tr>
-					</c:if>
 				</table>
-				<c:forEach var="f" items="${answerList}">
+				<c:forEach var="f" items="${answerList}" varStatus="status">
 
 					<form>
 						<c:if test="${e.q_id == f.q_id }">
@@ -177,7 +178,7 @@ table {
 
 	<div class="qlist">
 		<p>未対応</p>
-		<c:forEach var="g" items="${questionYetList}">
+		<c:forEach var="g" items="${questionYetList}" varStatus="status">
 			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
@@ -196,27 +197,21 @@ table {
 
 						<td><strong>${g.first}</strong><input type="hidden"
 							name="first" value="${g.first}"><br></td>
-						<td><input type="checkbox" name="syousai">詳細</td>
+						<td><input type="checkbox" name="syousai" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 
 						<td><input type="submit" name="answer" value="回答"></td>
 					</tr>
 				</table>
 			</form>
 
-			<div class="hidden">
+			<div class="del" id="delId${status.index}">
 				<table class="line">
 					<tr>
 						<td><strong>${g.q_content}</strong><input type="hidden"
 							name="q_content" value="${g.q_content}"><br></td>
 					</tr>
-					<c:if test="items = ${g.q_image != null }">
-						<tr>
-							<td><strong>${g.q_image}</strong><input type="hidden"
-								name="q_image" value="${g.q_image}"><br></td>
-						</tr>
-					</c:if>
 				</table>
-				<c:forEach var="f" items="${answerList}">
+				<c:forEach var="f" items="${answerList}" varStatus="status">
 
 					<form>
 						<c:if test="${g.q_id == f.q_id }">
@@ -247,7 +242,7 @@ table {
 
 	<div class="qlist">
 		<p>対応完了</p>
-		<c:forEach var="i" items="${questionEndList}">
+		<c:forEach var="i" items="${questionEndList}" varStatus="status">
 
 			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
@@ -267,7 +262,7 @@ table {
 
 						<td><strong>${i.first}</strong><input type="hidden"
 							name="first" value="${i.first}"><br></td>
-						<td><input type="checkbox" name="syousai">詳細</td>
+						<td><input type="checkbox" name="syousai" value="1" onchange="disp('${status.index}')"  id="checkId${status.index}">詳細</td>
 
 						<td><input type="submit" name="answer" value="回答"></td>
 					</tr>
@@ -275,21 +270,16 @@ table {
 			</form>
 
 
-			<div class="hidden">
+			<div class="del" id="delId${status.index}">
 				<table class="line">
 					<tr>
 						<td><strong>${i.q_content}</strong><input type="hidden"
 							name="q_content" value="${i.q_content}"><br></td>
 
 					</tr>
-					<c:if test="${g.q_image != null }">
-						<tr>
-							<td><strong>${i.q_image}</strong><input type="hidden"
-								name="" value="${i.q_image}"><br></td>
-						</tr>
-					</c:if>
+
 				</table>
-				<c:forEach var="f" items="${answerList}">
+				<c:forEach var="f" items="${answerList}" varStatus="status">
 
 					<form>
 						<c:if test="${i.q_id == f.q_id }">
@@ -318,11 +308,37 @@ table {
 		</c:forEach>
 	</div>
 	<script>
-		$(document).ready(function() {
-			$('.more').on('check', function() {
-				$(this).next().toggleClass('hidden');
-			});
-		});
+	function disp(indexNo){
+		//ここは隠している項目を表示する部分-------------------
+		//チェックボックスの状態を取得
+		var ch =document.getElementById('checkId'+indexNo);
+		//隠している部分の情報を取得
+		var hide =document.getElementById('delId'+indexNo);
+
+		//もし、チェックボックスにチェックがついたら
+		if(ch.checked){
+			//隠している部分のクラス適用（隠す）を無くす
+			hide.setAttribute('class','');
+		}else{
+			//隠している部分のクラス適用（隠す）をつける
+			hide.setAttribute('class','del');
+		}
+
+
+		//ここからは、非活性のボタンを活性化する部分-------------------
+		//チェックボックスの状態を取得
+		var check =document.getElementById('checkId'+indexNo);
+		//ボタンの情報を取得
+		var button = document.getElementById('buttonId'+indexNo);
+		//チェックを付けたら
+		if(check.checked){
+			//ボタンを活性化
+			button.disabled = false;
+		}else{
+			//ボタンを非活性
+			button.disabled = true;
+		}
+	}
 	</script>
 </body>
 <jsp:include page="footer.jsp" />

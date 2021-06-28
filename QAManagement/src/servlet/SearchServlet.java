@@ -139,13 +139,15 @@ public class SearchServlet extends HttpServlet {
 
 
 		} else if(request.getParameter("search_name")!=null) {
-			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
+			System.out.println(name);
 			// 個人絞り込み 名前検索
 
 			List<User> filterList = uDAO.userFilter(name);
 			// 検索結果をリクエストスコープに格納
 			request.setAttribute("filterList",filterList);
+
+			System.out.println(filterList.size());
 
 			// 個人絞り込みページにフォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/filter.jsp");
@@ -190,7 +192,7 @@ public class SearchServlet extends HttpServlet {
 
 
 			} else {
-
+				user_class = user.getUser_class();
 
 
 				// 回答者だったとき
