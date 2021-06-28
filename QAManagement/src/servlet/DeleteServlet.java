@@ -59,7 +59,7 @@ public class DeleteServlet extends HttpServlet {
 
 		// 回答削除
 		// 回答者マイページ
-		if (request.getParameter("a_delete_button").equals("回答削除")) {
+		if (request.getParameter("a_delete_button") != null) {
 			int a_id = Integer.parseInt(request.getParameter("a_id"));
 			if(aDAO.delete(a_id))  {
 				// 削除の結果をリクエストスコープに格納
@@ -83,7 +83,7 @@ public class DeleteServlet extends HttpServlet {
 
 			// 質問削除
 			// 質問者マイページ
-		} else if (request.getParameter("q_delete_button").equals("質問削除")) {
+		} else if (request.getParameter("q_delete_button") != null) {
 			int q_id = Integer.parseInt(request.getParameter("q_id"));
 			if(qDAO.delete(q_id))  {
 				// 削除の結果をリクエストスコープに格納

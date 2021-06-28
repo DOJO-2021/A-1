@@ -74,7 +74,7 @@ public class SearchServlet extends HttpServlet {
 
 
 		if(request.getParameter("search")!=null) {
-			 q_id = Integer.parseInt(request.getParameter("q_id"));
+
 
 			 System.out.println("左検索");
 			// 閲覧ページ左側 検索ボックス
@@ -94,6 +94,15 @@ public class SearchServlet extends HttpServlet {
 			List<AllBeans> answerList = aDAO.list_answer();
 			//返信をリクエストスコープに格納
 			request.setAttribute("answerList",answerList);
+			System.out.println(q_content);
+			System.out.println(user_class);
+			System.out.println(category);
+			System.out.println(people);
+
+
+			System.out.println(questionYetList.size());
+			System.out.println(questionNowList.size());
+			System.out.println(questionEndList.size());
 
 
 			// 閲覧ページにフォワード
@@ -149,7 +158,7 @@ public class SearchServlet extends HttpServlet {
 			// 受講者だったとき
 
 			if(user.getPosition().equals("受講生") ){
-				 q_id = Integer.parseInt(request.getParameter("q_id"));
+				 user_id = user.getUser_id();
 
 
 				List<AllBeans> q_idNowList = qDAO.idNow(user_id);
@@ -169,14 +178,19 @@ public class SearchServlet extends HttpServlet {
 				//返信をリクエストスコープに格納
 				request.setAttribute("answerList",answerList);
 
+				System.out.println();
+				System.out.println();
+				System.out.println();
+
 
 				// 質問者マイページにフォワード
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/q_mypage.jsp");
 				dispatcher.forward(request, response);
 
 
+
 			} else {
-				 q_id = Integer.parseInt(request.getParameter("q_id"));
+
 
 
 				// 回答者だったとき

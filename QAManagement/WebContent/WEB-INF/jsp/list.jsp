@@ -60,19 +60,19 @@ table {
 				<form method="POST" action="/QAManagement/SearchServlet">
 					<table>
 						<tr>
-							<td><label><input type="text" name="content"
+							<td><label><input type="text" name="q_content"
 									placeholder="ああああああ"></label><br></td>
 						</tr>
 						<tr>
 							<td><select name="people">
-									<option>質問相手を選択</option>
+									<option value ="">質問相手を選択</option>
 									<option value="講師">講師</option>
 									<option value="事務局">事務局</option>
 							</select><br></td>
 						</tr>
 						<tr>
-							<td><select name="class">
-									<option>クラスを選択</option>
+							<td><select name="user_class">
+									<option value= "">クラスを選択</option>
 									<option value="A">A</option>
 									<option value="B">B</option>
 									<option value="C">C</option>
@@ -84,7 +84,7 @@ table {
 						</tr>
 						<tr>
 							<td><select name="category">
-									<option>カテゴリーを選択</option>
+									<option value = "">カテゴリーを選択</option>
 									<option value="機材関係">機材関係</option>
 									<option value="用語">用語</option>
 									<option value="コーディング">コーディング</option>
@@ -139,7 +139,6 @@ table {
 					</tr>
 					<c:if test="${e.q_image != null }">
 						<tr>
-							<td><strong>{e.q_image}</strong><input type="hidden" name=""
 								value=""><br></td>
 						</tr>
 					</c:if>
