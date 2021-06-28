@@ -20,7 +20,7 @@ p {
 </head>
 <body>
 <footer>
-<p>©copyrigh heiwajima All rights reserved.</p>
+<p>©copyright heiwajima All rights reserved.</p>
 </footer>
 </body>
 </html>

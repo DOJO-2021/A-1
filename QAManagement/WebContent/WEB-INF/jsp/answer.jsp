@@ -73,7 +73,9 @@ input[name=rp_reply]{
 <h2>回答ページ</h2>
 <table class="qatable">
 	<tr>
-		<td class ="mt">クラス：<label><c:out value="${answerList[0].user_class}" /></label>相手：<label><c:out value="${answerList[0].people}" /></label>名前：<label><c:out value="${answerList[0].name}" /></label></td>
+		<td class ="mt">クラス：<label><c:out value="${answerList[0].user_class}" /></label>相手：<label><c:out value="${answerList[0].people}" /></label>
+		<label><c:if test="${sessionScope.user.position != '受講生'}"><strong>名前：${answerList[0].name}</strong><c:out value="${answerList[0].name}" /><br></c:if>
+		</label></td>
 	</tr>
 	<tr>
 		<td class ="mt">優先度：<label><c:out value="${answerList[0].first}" /></label>カテゴリー：<label><c:out value="${answerList[0].category}" /></label></td>
