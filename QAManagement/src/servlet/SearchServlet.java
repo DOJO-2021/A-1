@@ -71,62 +71,12 @@ public class SearchServlet extends HttpServlet {
 		UserDAO uDAO = new UserDAO();
 		AnswerDAO aDAO = new AnswerDAO();
 
-		// ログインサーブレットからリダイレクト
-		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
-		System.out.println(request.getParameter("login")+"←ろぐいん");
-		System.out.println(request.getParameter("FLG"+"フラグ"));
-		if(request.getParameter("login")==null && request.getParameter("FLG")==null){
-			List<AllBeans> questionNowList = qDAO.defaultNow();
-			// 対応中検索結果をリクエストスコープに格納
-			request.setAttribute("questionNowList",questionNowList);
-			System.out.println(questionNowList.size() + "cccccccccc");
-			List<AllBeans> questionYetList = qDAO.defaultYet();
-			// 未対応検索結果をリクエストスコープに格納
-			request.setAttribute("questionYetList",questionYetList);
-			System.out.println(questionYetList.size() + "ddddddddddd");
-
-			List<AllBeans> questionEndList = qDAO.defaultEnd();
-			// 対応済み検索結果をリクエストスコープに格納
-			request.setAttribute("questionEndList",questionEndList);
-
-			List<AllBeans> answerList = aDAO.list_answer();
-			System.out.println(answerList.size()+"aaaaaaaaaa");
-			//返信をリクエストスコープに格納
-			request.setAttribute("answerList",answerList);
-
-			// 閲覧ページにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
-			dispatcher.forward(request, response);
-		}else if (request.getParameter("login")!=null || request.getParameter("FLG").equals("閲覧ページへ")) {
 
 
-			List<AllBeans> questionNowList = qDAO.defaultNow();
-			System.out.println(questionNowList.size());
-
-			// 対応中検索結果をリクエストスコープに格納
-			request.setAttribute("questionNowList",questionNowList);
-
-			List<AllBeans> questionYetList = qDAO.defaultYet();
-			// 未対応検索結果をリクエストスコープに格納
-			request.setAttribute("questionYetList",questionYetList);
-
-			List<AllBeans> questionEndList = qDAO.defaultEnd();
-			// 対応済み検索結果をリクエストスコープに格納
-			request.setAttribute("questionEndList",questionEndList);
-
-			List<AllBeans> answerList = aDAO.list_answer();
-			//返信をリクエストスコープに格納
-			request.setAttribute("answerList",answerList);
-
-			// 閲覧ページにフォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
-			dispatcher.forward(request, response);
-
-
-		} else if(request.getParameter("search")!=null) {
+		if(request.getParameter("search")!=null) {
 			 q_id = Integer.parseInt(request.getParameter("q_id"));
 
-
+			 System.out.println("左検索");
 			// 閲覧ページ左側 検索ボックス
 
 			List<AllBeans> questionNowList = qDAO.searchNow(q_content,user_class,category,people);
@@ -193,7 +143,7 @@ public class SearchServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 
 
-		} else if(request.getParameter("FLG").equals("マイページ")) {
+		} else if(request.getParameter("MYFLG") != null) {
 
 			// ヘッダーからマイページクリック
 			// 受講者だったとき
@@ -265,6 +215,56 @@ public class SearchServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/answer.jsp");
 			dispatcher.forward(request, response);
 		}
+		// ログインサーブレットからリダイレクト
+		// ログインボタン ヘッダーの閲覧 リザルトページの戻る
+
+		else if(request.getParameter("login")==null && request.getParameter("FLG")==null){
+			List<AllBeans> questionNowList = qDAO.defaultNow();
+			// 対応中検索結果をリクエストスコープに格納
+			request.setAttribute("questionNowList",questionNowList);
+			System.out.println(questionNowList.size() + "cccccccccc");
+			List<AllBeans> questionYetList = qDAO.defaultYet();
+			// 未対応検索結果をリクエストスコープに格納
+			request.setAttribute("questionYetList",questionYetList);
+			System.out.println(questionYetList.size() + "ddddddddddd");
+
+			List<AllBeans> questionEndList = qDAO.defaultEnd();
+			// 対応済み検索結果をリクエストスコープに格納
+			request.setAttribute("questionEndList",questionEndList);
+
+			List<AllBeans> answerList = aDAO.list_answer();
+			System.out.println(answerList.size()+"aaaaaaaaaa");
+			//返信をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
+
+			// 閲覧ページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
+			dispatcher.forward(request, response);
+		}else if (request.getParameter("login")!=null || request.getParameter("FLG").equals("閲覧ページへ")) {
+
+
+			List<AllBeans> questionNowList = qDAO.defaultNow();
+			System.out.println(questionNowList.size());
+
+			// 対応中検索結果をリクエストスコープに格納
+			request.setAttribute("questionNowList",questionNowList);
+
+			List<AllBeans> questionYetList = qDAO.defaultYet();
+			// 未対応検索結果をリクエストスコープに格納
+			request.setAttribute("questionYetList",questionYetList);
+
+			List<AllBeans> questionEndList = qDAO.defaultEnd();
+			// 対応済み検索結果をリクエストスコープに格納
+			request.setAttribute("questionEndList",questionEndList);
+
+			List<AllBeans> answerList = aDAO.list_answer();
+			//返信をリクエストスコープに格納
+			request.setAttribute("answerList",answerList);
+
+			// 閲覧ページにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/list.jsp");
+			dispatcher.forward(request, response);
 
 	}
+}
 }

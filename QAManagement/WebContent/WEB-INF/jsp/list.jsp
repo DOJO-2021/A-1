@@ -45,9 +45,8 @@ table {
 	width: 800px;
 }
 
-
 .empty {
-margin:2px;
+	margin: 2px;
 }
 </style>
 </head>
@@ -58,7 +57,7 @@ margin:2px;
 	<div class="qwrap">
 		<div class="qs">
 			<div class="searchform">
-				<form method="POST" action="/Searchservlet">
+				<form method="POST" action="/QAManagement/SearchServlet">
 					<table>
 						<tr>
 							<td><label><input type="text" name="content"
@@ -110,8 +109,7 @@ margin:2px;
 			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
-						<td><input type="hidden"
-							name="q_id" value="${e.q_id}"></td>
+						<td><input type="hidden" name="q_id" value="${e.q_id}"></td>
 						<td><strong>${e.user_class}</strong><input type="hidden"
 							name="user_class" value="${e.user_class}"><br></td>
 
@@ -138,8 +136,6 @@ margin:2px;
 					<tr>
 						<td><strong>${e.q_content}</strong><input type="hidden"
 							name="q_content" value="${e.q_content}"><br></td>
-						<td class="delete"><input type="submit"
-							name="q_delete_button" value="質問削除"></td>
 					</tr>
 					<c:if test="${e.q_image != null }">
 						<tr>
@@ -186,14 +182,13 @@ margin:2px;
 			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
-						<td><input type="hidden"
-							name="q_id" value="${g.q_id}"></td>
+						<td><input type="hidden" name="q_id" value="${g.q_id}"></td>
 						<td><strong>${g.user_class}</strong><input type="hidden"
 							name="user_class" value="${g.user_class}"><br></td>
 
 						<td><strong>${g.people}</strong><input type="hidden"
 							name="people" value="${g.people}"><br></td>
-						<c:if test="${sessionScope.user.position != 受講生}">
+						<c:if test="${sessionScope.user.position != '受講生'}">
 							<td><strong>${g.name}</strong><input type="hidden"
 								name="name" value="${g.name}"><br></td>
 						</c:if>
@@ -214,8 +209,6 @@ margin:2px;
 					<tr>
 						<td><strong>${g.q_content}</strong><input type="hidden"
 							name="q_content" value="${g.q_content}"><br></td>
-						<td class="delete"><input type="submit"
-							name="q_delete_button" value="質問削除"></td>
 					</tr>
 					<c:if test="items = ${g.q_image != null }">
 						<tr>
@@ -260,14 +253,13 @@ margin:2px;
 			<form method="POST" action="/QAManagement/SearchServlet?FLG=answer">
 				<table class="line">
 					<tr>
-						<td><input type="hidden"
-							name="q_id" value="${i.q_id}"></td>
+						<td><input type="hidden" name="q_id" value="${i.q_id}"></td>
 						<td><strong>${i.user_class}</strong><input type="hidden"
 							name="user_class" value="${i.user_class}"><br></td>
 
 						<td><strong>${i.people}</strong><input type="hidden"
 							name="people" value="${i.people}"><br></td>
-						<c:if test="${sessionScope.user.position != 受講生}">
+						<c:if test="${sessionScope.user.position != '受講生'}">
 							<td><strong>${i.name}</strong><input type="hidden"
 								name="name" value="${i.name}"><br></td>
 						</c:if>
@@ -283,13 +275,13 @@ margin:2px;
 				</table>
 			</form>
 
+
 			<div class="hidden">
 				<table class="line">
 					<tr>
 						<td><strong>${i.q_content}</strong><input type="hidden"
 							name="q_content" value="${i.q_content}"><br></td>
-						<td class="delete">
-						<input type= "submit" name = "q_delete_button" value = "質問削除"></td>
+
 					</tr>
 					<c:if test="${g.q_image != null }">
 						<tr>

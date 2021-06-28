@@ -12,7 +12,7 @@
 		<ul class="nav">
 			<li><a href="/QAManagement/LogOutServlet">ログアウト</a></li>
 			<li><a href="/QAManagement/ChangePageServlet?FLG=会員情報変更">会員情報変更</a></li>
-			<li><a href="/QAManagement/SearchServlet?FLG=マイページ">マイページ</a></li>
+			<li><a href="/QAManagement/SearchServlet?MYFLG=マイページ">マイページ</a></li>
 			<li><a href="/QAManagement/SearchServlet">閲覧</a>
 
 			<!-- ↓回答者側では隠れる↓ -->

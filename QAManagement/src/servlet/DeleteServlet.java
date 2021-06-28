@@ -49,8 +49,8 @@ public class DeleteServlet extends HttpServlet {
 		// リクエストパラメータを取得する
 		request.setCharacterEncoding("UTF-8");
 
-		int a_id = Integer.parseInt(request.getParameter("a_id"));
-		int q_id = Integer.parseInt(request.getParameter("q_id"));
+
+
 		AnswerDAO aDAO = new AnswerDAO();
 
 
@@ -60,7 +60,7 @@ public class DeleteServlet extends HttpServlet {
 		// 回答削除
 		// 回答者マイページ
 		if (request.getParameter("a_delete_button").equals("回答削除")) {
-
+			int a_id = Integer.parseInt(request.getParameter("a_id"));
 			if(aDAO.delete(a_id))  {
 				// 削除の結果をリクエストスコープに格納
 				request.setAttribute("message", "削除しました。");
@@ -84,24 +84,24 @@ public class DeleteServlet extends HttpServlet {
 			// 質問削除
 			// 質問者マイページ
 		} else if (request.getParameter("q_delete_button").equals("質問削除")) {
+			int q_id = Integer.parseInt(request.getParameter("q_id"));
+			if(qDAO.delete(q_id))  {
+				// 削除の結果をリクエストスコープに格納
+				request.setAttribute("message", "削除しました。");
 
-				if(qDAO.delete(q_id))  {
-					// 削除の結果をリクエストスコープに格納
-					request.setAttribute("message", "削除しました。");
-
-					// resultページにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
-					dispatcher.forward(request, response);
+				// resultページにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
+				dispatcher.forward(request, response);
 
 
-				} else {
-					// 削除の失敗結果をリクエストスコープに格納
-					request.setAttribute("message", "削除に失敗しました。");
+			} else {
+				// 削除の失敗結果をリクエストスコープに格納
+				request.setAttribute("message", "削除に失敗しました。");
 
-					// resultページにフォワード
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
-					dispatcher.forward(request, response);
-				}
+				// resultページにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/message.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 }
